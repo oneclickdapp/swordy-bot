@@ -31,6 +31,9 @@ export const userByDiscordId = async ({ discordId }) => {
       data: { discordId, address: userAddress },
     })
   }
+  // TODO: lookup NFTs
+  // NOTE: NFT ownership data is ephemeral, so we should
+  // not store it in the database
   return user
 }
 

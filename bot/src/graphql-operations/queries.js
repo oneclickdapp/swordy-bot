@@ -1,73 +1,16 @@
 import gql from 'graphql-tag'
 
-export const getAccountById = gql`
-  query accountById($id: Bytes) {
-    account(id: $id) {
+export const userByDiscordId = gql`
+  query USER_BY_DISCORD_ID($discordId: String) {
+    userByDiscordId(discordId: $discordId) {
       id
-      balance
-      hat {
+      nftsOwned {
         id
-      }
-      loansOwned(where: { amount_gt: 0 }) {
-        id
-        amount
-        recipient {
-          id
-        }
-      }
-      loansReceived(where: { amount_gt: 0 }) {
-        id
-        amount
-        owner {
-          id
-        }
-      }
-    }
-  }
-`
-
-export const getAllUsersWithHat = gql`
-  query allUsersWithHat($id: String) {
-    accounts(
-      where: { id_not: "0x0000000000000000000000000000000000000000", hat: $id }
-    ) {
-      id
-      balance
-      hat {
-        id
-      }
-    }
-  }
-`
-export const getLoanById = gql`
-  query loanById($id: String) {
-    loan(id: $id) {
-      amount
-      interestRedeemed
-      sInternal
-    }
-  }
-`
-export const allReceivedLoans = gql`
-  query allReceivedLoans($recipient: String) {
-    loans(where: { recipient: $recipient }, first: 1000) {
-      amount
-      interestRedeemed
-      sInternal
-      owner {
-        id
-      }
-    }
-  }
-`
-export const allOwnedLoans = gql`
-  query allOwnedLoans($owner: String) {
-    loans(where: { owner: $owner }, first: 100) {
-      amount
-      interestRedeemed
-      sInternal
-      recipient {
-        id
+        website
+        contractAddress
+        tokenId
+        uri
+        iconUrl
       }
     }
   }
