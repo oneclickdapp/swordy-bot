@@ -14,7 +14,7 @@ class ApiMgr {
       uri: url,
       fetch,
     })
-    this.store = new ApolloClient({
+    this.client = new ApolloClient({
       link,
       cache,
       onError: (e) => {
@@ -28,29 +28,16 @@ class ApiMgr {
     })
   }
 
-  async saveRequest({ username, did, userId }) {
-    if (!did) throw new Error('no did')
-    if (!username) throw new Error('no discord handle')
-    if (!userId) throw new Error('no user ID')
-
-    let challengeCode = randomString(32)
-
-    const data = {
-      did,
-      username,
-      timestamp: Date.now(),
-      challengeCode,
-      userId,
-    }
+  async getNfts(discordId) {
+    if (!discordId) throw new Error('no discordId')
+    let nfts = []
     try {
-      await this.store.set(did, JSON.stringify(data))
-      // console.log('Saved: ' + JSON.stringify(data))
+      const ownedNfts = await this.client
     } catch (e) {
       console.log(e)
-      throw new Error(`issue writing to the database for ${did}. ${e}`)
+      return { error: e }
     }
-    // await this.store.quit()
-    return challengeCode
+    return nfts
   }
 }
 

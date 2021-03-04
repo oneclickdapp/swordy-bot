@@ -12,7 +12,9 @@ const {
   DISCORD_FAIL,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
-  DISCORD_CHECKING_MESSAGE,
+  DISCORD_APPROVE_CONSENT,
+  DISCORD_DENY_CONSENT,
+  DISCORD_CONSENT_TIMEOUT,
 } = require('./textContent')
 
 discordClient.once('ready', async () => {
@@ -20,28 +22,11 @@ discordClient.once('ready', async () => {
 })
 
 discordClient.on('message', async (message) => {
-  /////////////////////////////
-  // DIRECT MESSAGE
-  /////////////////////////////
-  if (message.channel.type === 'dm') {
-    // const { username: handle, discriminator, id: userId } = message.author
-    // if (handle === '3box-verifications-v2') return
-    // const username = `${handle}#${discriminator}`
-    // const challengeCode = await apiMgr.saveRequest({
-    //   did,
-    //   username,
-    //   userId,
-    // })
-    // message.channel.send(`${DISCORD_CHALLENGE_SUCCESS} \`${challengeCode}\``)
-    /////////////////////////////
-    // INVOCATION IN PULIC CHANNEL
-    /////////////////////////////
-  } else if (message.content === process.env.INVOCATION_STRING) {
+  if (message.content === process.env.INVOCATION_STRING) {
     // console.log(message);
     message.reply(DISCORD_REPLY)
     const sentMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
     await sentMessage.react('❌')
-    // Order matters :)
     await sentMessage.react('✅')
     const filter = (reaction, user) => {
       return (
@@ -57,22 +42,22 @@ discordClient.on('message', async (message) => {
         if (reaction.emoji.name === '✅') {
           checkNftAndAssignRoles(sentMessage, message.author.id)
         } else {
-          sentMessage.reply('Ok, no problem. Goodbye!')
+          sentMessage.reply(DISCORD_DENY_CONSENT)
         }
       })
       .catch((collected) => {
         console.log(`Timeout for emoji response ${sentMessage.author}`)
-        // TODO: Add message if user doesn't react? Probably don't want to bother them
-        // sentMessage.reply(
-        //   'you did not reacted with neither a thumbs up, nor a thumbs down.'
-        // )
+        sentMessage.reply(DISCORD_CONSENT_TIMEOUT)
       })
   }
 })
 
-const checkNftAndAssignRoles = async (message) => {
-  await message.reply(DISCORD_CHECKING_MESSAGE)
-  // const nfts = await apiMgr.getNfts(message.author.id)
+const checkNftAndAssignRoles = async (message, authorId) => {
+  await message.reply(DISCORD_APPROVE_CONSENT)
+  const { nfts, error } = await apiMgr.getNfts(authorId)
+  if (error) return message.reply(error)
+  if (!nfts) return message.reply(DISCORD_FAIL)
+  // TODO: assign roles in server
   await message.reply(DISCORD_SUCCESS)
 }
 
