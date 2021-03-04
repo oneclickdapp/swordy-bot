@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import { fetchCollabLandUserWallets } from 'src/lib/collabLand'
 
 export const users = () => {
   return db.user.findMany()
@@ -8,6 +9,29 @@ export const user = ({ id }) => {
   return db.user.findUnique({
     where: { id },
   })
+}
+
+export const userByDiscordId = async ({ discordId }) => {
+  // DELETE ME
+  await db.user.delete({
+    where: { discordId },
+  })
+  let user = await db.user.findUnique({
+    where: { discordId },
+  })
+  if (user) console.log(`User "${discordId}" found.`)
+  if (!user) {
+    console.log(`User "${discordId}" not found. Asking CollabLand...`)
+    const wallets = await fetchCollabLandUserWallets(discordId)
+    if (!wallets) throw Error('User is not signed up with Collab Land')
+    // TODO: check multiple wallets
+    const userAddress = wallets[0].address
+
+    user = await db.user.create({
+      data: { discordId, address: userAddress },
+    })
+  }
+  return user
 }
 
 export const createUser = ({ input }) => {

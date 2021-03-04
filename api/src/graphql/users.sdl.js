@@ -2,21 +2,22 @@ export const schema = gql`
   type User {
     id: String!
     address: String!
-    discordHandle: String!
-    authDetail: AuthDetail!
+    discordId: String!
+    authDetail: AuthDetail
     nftsOwned: [Nft]!
-    authDetailId: String!
+    authDetailId: String
   }
 
   type Query {
     users: [User!]!
     user(id: String!): User
+    userByDiscordId(discordId: String!): User
   }
 
   input CreateUserInput {
     address: String!
     discordHandle: String!
-    authDetailId: String!
+    authDetailId: String
   }
 
   input UpdateUserInput {

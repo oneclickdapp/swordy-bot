@@ -1,15 +1,13 @@
 export const standard = defineScenario({
   user: {
     one: {
-      address: 'String2466856',
-      discordHandle: 'String2468854',
-      authDetail: { create: { nonce: 'String' } },
+      address: '0x9492510bbcb93b6992d8b7bb67888558e12dcac4',
+      discordId: '381135787330109441',
     },
 
     two: {
       address: 'String6546822',
-      discordHandle: 'String4604309',
-      authDetail: { create: { nonce: 'String' } },
+      discordId: 'String4604309',
     },
   },
 })

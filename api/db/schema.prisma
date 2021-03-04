@@ -12,8 +12,8 @@ generator client {
 model User {
   id         String     @id @default(uuid())
   address    String     @unique
-  discordHandle String @unique
-  authDetail AuthDetail
+  discordId String @unique
+  authDetail AuthDetail?
   nftsOwned Nft[] @relation(name:"nftsOwned")
 }
 
