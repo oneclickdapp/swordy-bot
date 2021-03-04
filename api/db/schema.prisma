@@ -1,5 +1,6 @@
 datasource DS {
   provider = "sqlite"
+  // provider =  "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -8,11 +9,27 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model User {
+  id         String     @id @default(uuid())
+  address    String     @unique
+  discordHandle String @unique
+  authDetail AuthDetail
+  nftsOwned Nft[] @relation(name:"nftsOwned")
+}
+
+model AuthDetail {
+  id        String   @id @default(uuid())
+  nonce     String
+  timestamp DateTime @default(now())
+}
+
+model Nft {
+  id        String   @id @default(uuid())
+  website String?
+  contractAddress String?
+  tokenId String
+  uri String @default("")
+  iconUrl String?
+  owner     User     @relation(name:"nftsOwned", fields: [ownerAddress], references: [address])
+  ownerAddress  String
 }

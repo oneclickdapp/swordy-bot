@@ -1,15 +1,17 @@
-import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
-import fetch from 'cross-fetch'
+const { ApolloClient } = require('apollo-client')
+const { InMemoryCache } = require('apollo-cache-inmemory')
+const { HttpLink } = require('apollo-link-http')
+const fetch = require('cross-fetch')
 
-import { SUBGRAPH_URLS } from './constants'
+const DEFAULT_URL = 'http://localhost:8911/api/graphql'
 
 class ApiMgr {
-  constructor({ url, network, debug }) {
+  constructor() {
+    const url = DEFAULT_URL
+    const debug = true
     const cache = new InMemoryCache()
     const link = new HttpLink({
-      uri: subgraphURL,
+      uri: url,
       fetch,
     })
     this.store = new ApolloClient({

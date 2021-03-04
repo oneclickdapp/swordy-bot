@@ -1,10 +1,10 @@
 require('dotenv').config()
 const Discord = require('discord.js')
 const fetch = require('node-fetch')
-const apiMgr = require('./apiMgr')
+const ApiMgr = require('./apiMgr')
 
 const discordClient = new Discord.Client()
-const apiMgr = new apiMgr()
+const apiMgr = new ApiMgr()
 
 const DISCORD_SERVER_ERROR = 'Whoops... we had an internal issue'
 const DISCORD_CHALLENGE_SUCCESS = 'Great! Your challenge code is: '
@@ -12,11 +12,6 @@ const DISCORD_INVALID_DID =
   "Oops! That doesn't look right. It looks like this: `did:key:z6MkkyAkqY9bPr8gyQGuJTwQvzk8nsfywHCH4jyM1CgTq4KA`"
 const DISCORD_REPLY = `Please check your DMs`
 const DISCORD_INITIAL_PROMPT = `Hi there! Lets get you verified. Reply with your did. It should look similar to this example: \`did:key:z6MkkyAkqY9bPr8gyQGuJTwQvzk8nsfywHCH4jyM1CgTq4KA\``
-
-// TODO: remove and replace with redis code
-const API_ENDPOINT =
-  'https://r27sfer037.execute-api.us-west-2.amazonaws.com/develop'
-// const API_ENDPOINT = "http://localhost:3000";
 
 discordClient.once('ready', async () => {
   console.log('Ready!')
@@ -26,6 +21,7 @@ discordClient.on('message', async (message) => {
   /////////////////////////////
   // VERIFICATION IN DIRECT MESSAGE
   /////////////////////////////
+  console.log(message)
   if (message.channel.type === 'dm') {
     const { username: handle, discriminator, id: userId } = message.author
     if (handle === '3box-verifications-v2') return
