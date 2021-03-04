@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+const gql = require('graphql-tag')
 
-export const userByDiscordId = gql`
-  query USER_BY_DISCORD_ID($discordId: String) {
+const userByDiscordId = gql`
+  query USER_BY_DISCORD_ID($discordId: String!) {
     userByDiscordId(discordId: $discordId) {
       id
       nftsOwned {
@@ -15,3 +15,4 @@ export const userByDiscordId = gql`
     }
   }
 `
+module.exports = { userByDiscordId }

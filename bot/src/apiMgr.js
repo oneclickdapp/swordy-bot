@@ -2,8 +2,8 @@ const { ApolloClient } = require('apollo-client')
 const { InMemoryCache } = require('apollo-cache-inmemory')
 const { HttpLink } = require('apollo-link-http')
 const fetch = require('cross-fetch')
-
-const DEFAULT_URL = 'http://localhost:8911/api/graphql'
+const { userByDiscordId } = require('./graphql-operations/queries')
+const DEFAULT_URL = 'http://localhost:8911/graphql'
 
 class ApiMgr {
   constructor() {
@@ -32,7 +32,11 @@ class ApiMgr {
     if (!discordId) throw new Error('no discordId')
     let nfts = []
     try {
-      const ownedNfts = await this.client
+      const user = await this.client.query({
+        query: userByDiscordId,
+        variables: { discordId },
+      })
+      console.log(user)
     } catch (e) {
       console.log(e)
       return { error: e }

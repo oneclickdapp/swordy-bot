@@ -13,9 +13,9 @@ export const user = ({ id }) => {
 
 export const userByDiscordId = async ({ discordId }) => {
   // DELETE ME
-  await db.user.delete({
-    where: { discordId },
-  })
+  // await db.user.delete({
+  //   where: { discordId },
+  // })
   let user = await db.user.findUnique({
     where: { discordId },
   })
@@ -31,10 +31,10 @@ export const userByDiscordId = async ({ discordId }) => {
       data: { discordId, address: userAddress },
     })
   }
+  const nfts = []
   // TODO: lookup NFTs
-  // NOTE: NFT ownership data is ephemeral, so we should
-  // not store it in the database
-  return user
+  // NOTE: NFT ownership data is ephemeral, so we should not store it in the database
+  return { ...user, nfts }
 }
 
 export const createUser = ({ input }) => {

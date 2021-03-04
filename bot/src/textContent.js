@@ -1,7 +1,7 @@
 const DISCORD_SERVER_ERROR = 'Whoops... we had an internal issue'
 const DISCORD_SUCCESS = `🤩 What fantastic NFTs you have!
 I gave you some new roles. Head back to your server to use them. 👋 See ya`
-const DISCORD_FAIL = `🤔 We couldn't find the relevant NFTs in your wallet. Contact us if you believe this is an error https://twitter.com/pi0neerpat`
+const DISCORD_FAIL = `🤔 We couldn't find the relevant NFTs in your wallet. If you believe this is an error, contact us: https://twitter.com/pi0neerpat`
 const DISCORD_REPLY = `Please check your DMs`
 const DISCORD_INITIAL_PROMPT = `👋 Hi there! Let's take a look at your NFTs.\n\nIn order to continue, you need to give the following permissions to the Unlock Protocol Bot:
 \n\`- Fetch your wallet address from your CollabLand account\`
