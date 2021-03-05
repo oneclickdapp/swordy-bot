@@ -8,7 +8,9 @@ const apiMgr = new ApiMgr()
 
 const {
   DISCORD_SERVER_ERROR,
-  DISCORD_SUCCESS,
+  DISCORD_SUCCESS_START,
+  DISCORD_SUCCESS_ACTION,
+  DISCORD_SUCCESS_FINISH,
   DISCORD_FAIL,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
@@ -30,17 +32,19 @@ const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   const { nfts, error } = await apiMgr.getNfts(guildMember.id)
   if (error) return message.reply(error)
   if (!nfts) return message.reply(DISCORD_FAIL)
+  await message.reply(DISCORD_SUCCESS_START)
   await Promise.all(
-    nfts.map((nft) => {
+    nfts.map(async (nft) => {
       const roleName = `${UNLOCKED_ROLE_BASE}-${nft.chainId}`
       const role = guild.roles.cache.find((role) => role.name === roleName)
       // TODO: Handle non-existent roles better
       if (!role)
         return console.log(`Role "${roleName}" does not exist for this guild.`)
       guildMember.roles.add(role.id)
+      await message.reply(DISCORD_SUCCESS_ACTION+`\`${roleName}\``)
     })
   )
-  await message.reply(DISCORD_SUCCESS)
+  await message.reply(DISCORD_SUCCESS_FINISH)
 }
 
 discordClient.on('message', async (message) => {
