@@ -27,7 +27,6 @@ discordClient.once('ready', async () => {
 
 const checkNftAndAssignRoles = async ({ message, guildMember, roleId }) => {
   await message.reply(DISCORD_APPROVE_CONSENT)
-  console.log(guildMember)
   const { nfts, error } = await apiMgr.getNfts(guildMember.id)
   if (error) return message.reply(error)
   // if (!nfts) return message.reply(DISCORD_FAIL)

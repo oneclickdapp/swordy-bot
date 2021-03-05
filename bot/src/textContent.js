@@ -1,6 +1,5 @@
 const DISCORD_SERVER_ERROR = `⛈️ Sorry, something went wrong.`
-const DISCORD_SUCCESS = `Success! What fantastic NFTs you have 🤩
-I gave you a new role, enjoy!`
+const DISCORD_SUCCESS = `Success! 🤩  You have some awesome NFTs, so I gave you a new role. Enjoy!`
 const DISCORD_FAIL = `🤔 I couldn't find the relevant NFTs in your wallet. If you believe this is an error, contact us: https://twitter.com/pi0neerpat`
 const DISCORD_REPLY = `Please check your DMs`
 const DISCORD_INITIAL_PROMPT = `👋 Hi there! Let's take a look at your NFTs.\n\nIn order to continue, you need to give the following permissions to the Unlock Protocol Bot:

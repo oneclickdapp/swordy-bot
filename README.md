@@ -80,7 +80,8 @@ docker-compose up -d
 
 ## Notes
 
-Helpful discord docs for making a "emoji-reaction" menu https://discordjs.guide/popular-topics/reactions.html#awaiting-reactions
+- If you have permissions errors, try giving the bot a higher role. Bots can only give roles to members in a _lower position_ than their own highest role. See https://discord.com/developers/docs/topics/permissions#permission-hierarchy
+- Helpful discord docs for making a "emoji-reaction" menu https://discordjs.guide/popular-topics/reactions.html#awaiting-reactions
 
 ## Author
 
