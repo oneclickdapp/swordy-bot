@@ -2,15 +2,16 @@ const PURCHASE_URL = `https://staging-app.unlock-protocol.com/checkout?paywallCo
 
 const DISCORD_SERVER_ERROR = `⛈️ Sorry, something went wrong.`
 const DISCORD_SUCCESS_START = "Yup, you've got the right stuff!"
-const DISCORD_SUCCESS_ACTION = "\n✨🗡️ I knight thee with "
-const DISCORD_SUCCESS_FINISH = "Now arise and head back to your guild"
+const DISCORD_SUCCESS_ACTION = '\n✨🗡️ I knight thee with '
+const DISCORD_SUCCESS_FINISH = 'Now arise and head back to your guild'
 
 const DISCORD_FAIL = `💼 Looks like you don't have the right NFTs in your wallet. Purchase one here: ${PURCHASE_URL}`
-const DISCORD_REPLY = `Please check your DMs`
+const DISCORD_REPLY = `You think you're worthy? Check your DMs`
 const DISCORD_INITIAL_PROMPT = `⚔️ Ready to be knighted? \n\nTo continue, I need the following permissions:
 \n-\`Fetch your wallet address from your CollabLand account\`
 \n If you agree, click the ✅`
-const DISCORD_ABOUT_BOT ="*Swordy is a community-maintained project by @pi0neerpat*"
+const DISCORD_ABOUT_BOT =
+  '*Swordy is a community-maintained project by @pi0neerpat*'
 const DISCORD_APPROVE_CONSENT = `Searching...`
 const DISCORD_DENY_CONSENT = `Ok, no problem. Goodbye!`
 const DISCORD_CONSENT_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over. In your server, type "${process.env.INVOCATION_STRING}"`

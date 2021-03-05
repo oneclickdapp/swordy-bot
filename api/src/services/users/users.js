@@ -1,6 +1,7 @@
 import { db } from 'src/lib/db'
 import { fetchCollabLandUserWallets } from 'src/lib/collabLand'
 import { fetchUnlockProtocolNfts } from 'src/lib/unlockProtocol'
+import { fetchChievNfts } from 'src/lib/chiev'
 
 export const users = () => {
   return db.user.findMany()
@@ -37,7 +38,8 @@ export const userByDiscordId = async ({ discordId }) => {
 
   // NOTE: NFT ownership data is ephemeral, so we should not store it in the database
   const nfts = await fetchUnlockProtocolNfts(user.address)
-  return { ...user, nfts }
+  const chievs = await fetchChievNfts(user.address)
+  return { ...user, nfts: [...nfts, ...chievs] }
 }
 
 export const createUser = ({ input }) => {

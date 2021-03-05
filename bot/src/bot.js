@@ -22,6 +22,7 @@ const {
 } = require('./textContent')
 
 const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
+const CHIEV_ROLE_BASE = 'one-snoo-club'
 
 discordClient.once('ready', async () => {
   console.log('Ready!')
@@ -31,17 +32,28 @@ const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   await message.reply(DISCORD_APPROVE_CONSENT)
   const { nfts, error } = await apiMgr.getNfts(guildMember.id)
   if (error) return message.reply(error)
+  console.log(nfts)
   if (!nfts) return message.reply(DISCORD_FAIL)
   await message.reply(DISCORD_SUCCESS_START)
   await Promise.all(
     nfts.map(async (nft) => {
-      const roleName = `${UNLOCKED_ROLE_BASE}-${nft.chainId}`
-      const role = guild.roles.cache.find((role) => role.name === roleName)
+      let roleName = `${UNLOCKED_ROLE_BASE}-${nft.chainId}`
+      let unlockRole = guild.roles.cache.find((role) => role.name === roleName)
       // TODO: Handle non-existent roles better
-      if (!role)
+      if (unlockRole) {
+        guildMember.roles.add(unlockRole.id)
+        await message.reply(DISCORD_SUCCESS_ACTION + `\`${roleName}\``)
+      }
+      console.log(`Role "${roleName}" does not exist for this guild.`)
+
+      roleName = `${CHIEV_ROLE_BASE}-${nft.chainId}`
+      console.log(roleName)
+      unlockRole = guild.roles.cache.find((role) => role.name === roleName)
+      // TODO: Handle non-existent roles better
+      if (!unlockRole)
         return console.log(`Role "${roleName}" does not exist for this guild.`)
-      guildMember.roles.add(role.id)
-      await message.reply(DISCORD_SUCCESS_ACTION+`\`${roleName}\``)
+      guildMember.roles.add(unlockRole.id)
+      await message.reply(DISCORD_SUCCESS_ACTION + `\`${roleName}\``)
     })
   )
   await message.reply(DISCORD_SUCCESS_FINISH)
