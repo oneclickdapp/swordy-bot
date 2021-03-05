@@ -3,7 +3,6 @@
   "workspaces": {
     "packages": [
       "api",
-      "web",
       "packages/*"
     ]
   },
