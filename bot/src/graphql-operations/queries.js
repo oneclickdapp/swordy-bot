@@ -4,12 +4,12 @@ const userByDiscordId = gql`
   query USER_BY_DISCORD_ID($discordId: String!) {
     userByDiscordId(discordId: $discordId) {
       id
-      nftsOwned {
-        id
+      nfts {
         website
         contractAddress
         tokenId
         uri
+        chainId
         iconUrl
       }
     }

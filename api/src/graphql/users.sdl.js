@@ -4,7 +4,7 @@ export const schema = gql`
     address: String!
     discordId: String!
     authDetail: AuthDetail
-    nftsOwned: [Nft]!
+    nfts: [Nft]!
     authDetailId: String
   }
 

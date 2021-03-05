@@ -1,13 +1,14 @@
 export const schema = gql`
   type Nft {
-    id: String!
+    id: String
     website: String
     contractAddress: String
-    tokenId: String!
+    tokenId: Int!
     uri: String!
     iconUrl: String
-    owner: User!
-    ownerAddress: String!
+    owner: User
+    chainId: Int!
+    ownerAddress: String
   }
 
   type Query {

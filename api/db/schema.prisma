@@ -27,9 +27,10 @@ model Nft {
   id        String   @id @default(uuid())
   website String?
   contractAddress String?
-  tokenId String
+  tokenId Int
   uri String @default("")
   iconUrl String?
+  chainId Int
   owner     User     @relation(name:"nftsOwned", fields: [ownerAddress], references: [address])
   ownerAddress  String
 }

@@ -1,5 +1,6 @@
 import { db } from 'src/lib/db'
 import { fetchCollabLandUserWallets } from 'src/lib/collabLand'
+import { fetchUnlockProtocolNfts } from 'src/lib/unlockProtocol'
 
 export const users = () => {
   return db.user.findMany()
@@ -12,7 +13,7 @@ export const user = ({ id }) => {
 }
 
 export const userByDiscordId = async ({ discordId }) => {
-  // DELETE ME
+  // DELETE ME only for testing purposes
   // await db.user.delete({
   //   where: { discordId },
   // })
@@ -23,7 +24,9 @@ export const userByDiscordId = async ({ discordId }) => {
   if (!user) {
     console.log(`User "${discordId}" not found. Asking CollabLand...`)
     const wallets = await fetchCollabLandUserWallets(discordId)
-    if (!wallets) throw Error('User is not signed up with Collab Land')
+    // TODO: throw error if no wallets?
+    if (!wallets.length) throw Error('User is not signed up with Collab Land')
+
     // TODO: check multiple wallets
     const userAddress = wallets[0].address
 
@@ -31,9 +34,9 @@ export const userByDiscordId = async ({ discordId }) => {
       data: { discordId, address: userAddress },
     })
   }
-  const nfts = []
-  // TODO: lookup NFTs
+
   // NOTE: NFT ownership data is ephemeral, so we should not store it in the database
+  const nfts = await fetchUnlockProtocolNfts(user.address)
   return { ...user, nfts }
 }
 

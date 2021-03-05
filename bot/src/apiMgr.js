@@ -28,18 +28,18 @@ class ApiMgr {
 
   async getNfts(discordId) {
     if (!discordId) throw new Error('no discordId')
-    let nfts = []
     try {
       const user = await this.client.query({
         query: userByDiscordId,
         variables: { discordId },
       })
-      console.log(user)
+      console.log(user);
+      console.log(user.data.userByDiscordId.nftsOwned);
+      return []
     } catch (e) {
       console.log(e)
       return { error: e }
     }
-    return nfts
   }
 }
 

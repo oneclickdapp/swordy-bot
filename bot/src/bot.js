@@ -29,7 +29,7 @@ const checkNftAndAssignRoles = async ({ message, guildMember, roleId }) => {
   await message.reply(DISCORD_APPROVE_CONSENT)
   const { nfts, error } = await apiMgr.getNfts(guildMember.id)
   if (error) return message.reply(error)
-  // if (!nfts) return message.reply(DISCORD_FAIL)
+  if (!nfts) return message.reply(DISCORD_FAIL)
   guildMember.roles.add(roleId)
   await message.reply(DISCORD_SUCCESS)
 }
@@ -57,6 +57,13 @@ discordClient.on('message', async (message) => {
       const sentMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
       await sentMessage.react('❌')
       await sentMessage.react('✅')
+
+// TODO: DELETE
+      checkNftAndAssignRoles({
+        message: sentMessage,
+        guildMember,
+        roleId: role.id,
+      })
 
       // Wait for Emoji reply
       const filter = (reaction, user) => {
