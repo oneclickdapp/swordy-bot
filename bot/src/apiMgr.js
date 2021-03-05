@@ -33,9 +33,7 @@ class ApiMgr {
         query: userByDiscordId,
         variables: { discordId },
       })
-      console.log(user);
-      console.log(user.data.userByDiscordId.nftsOwned);
-      return []
+      return { nfts: user.data.userByDiscordId.nfts }
     } catch (e) {
       console.log(e)
       return { error: e }

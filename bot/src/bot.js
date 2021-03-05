@@ -19,18 +19,27 @@ const {
   DISCORD_ALREADY_HAVE_ROLE,
 } = require('./textContent')
 
-const UNLOCKED_ROLE = 'Unlocked-Holder'
+const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
 
 discordClient.once('ready', async () => {
   console.log('Ready!')
 })
 
-const checkNftAndAssignRoles = async ({ message, guildMember, roleId }) => {
+const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   await message.reply(DISCORD_APPROVE_CONSENT)
   const { nfts, error } = await apiMgr.getNfts(guildMember.id)
   if (error) return message.reply(error)
   if (!nfts) return message.reply(DISCORD_FAIL)
-  guildMember.roles.add(roleId)
+  await Promise.all(
+    nfts.map((nft) => {
+      const roleName = `${UNLOCKED_ROLE_BASE}-${nft.chainId}`
+      const role = guild.roles.cache.find((role) => role.name === roleName)
+      // TODO: Handle non-existent roles better
+      if (!role)
+        return console.log(`Role "${roleName}" does not exist for this guild.`)
+      guildMember.roles.add(role.id)
+    })
+  )
   await message.reply(DISCORD_SUCCESS)
 }
 
@@ -46,9 +55,11 @@ discordClient.on('message', async (message) => {
       // Check user already has role
       const guild = message.guild
       const guildMember = message.member
-      const role = guild.roles.cache.find((role) => role.name === UNLOCKED_ROLE)
-      if (guildMember.roles.cache.has(role.id))
-        return message.reply(`${DISCORD_ALREADY_HAVE_ROLE} "${UNLOCKED_ROLE}"`)
+
+      // TODO: Remove/change after decisions are made re: role names
+      // const role = guild.roles.cache.find((role) => role.name === UNLOCKED_ROLE)
+      // if (guildMember.roles.cache.has(role.id))
+      //   return message.reply(`${DISCORD_ALREADY_HAVE_ROLE} "${UNLOCKED_ROLE}"`)
 
       // Tell user to check DMs
       message.reply(DISCORD_REPLY)
@@ -57,13 +68,6 @@ discordClient.on('message', async (message) => {
       const sentMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
       await sentMessage.react('❌')
       await sentMessage.react('✅')
-
-// TODO: DELETE
-      checkNftAndAssignRoles({
-        message: sentMessage,
-        guildMember,
-        roleId: role.id,
-      })
 
       // Wait for Emoji reply
       const filter = (reaction, user) => {
