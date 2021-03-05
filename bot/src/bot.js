@@ -93,6 +93,7 @@ discordClient.on('message', async (message) => {
           }
         })
         .catch((collected) => {
+          console.log(collected)
           console.log(`Timeout for emoji response ${sentMessage.author}`)
           sentMessage.reply(DISCORD_CONSENT_TIMEOUT)
         })
