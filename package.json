@@ -7,6 +7,9 @@
       "packages/*"
     ]
   },
+  "scripts": {
+    "heroku-prebuild": "cd bot && npm i"
+  },
   "devDependencies": {
     "@redwoodjs/core": "^0.26.2"
   },
