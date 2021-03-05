@@ -8,7 +8,7 @@
     ]
   },
   "scripts": {
-    "heroku-prebuild": "cd bot && npm i"
+    "heroku-prebuild": "cd bot && yarn install && exit 0;"
   },
   "devDependencies": {
     "@redwoodjs/core": "^0.26.2"
