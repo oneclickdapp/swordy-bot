@@ -1,4 +1,4 @@
-import lockAbi from './unlockAbi.json'
+import lockAbi from './unlockAbi'
 
 const CONTRACTS = {
   lock: {
