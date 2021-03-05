@@ -48,15 +48,15 @@ discordClient.on('message', async (message) => {
     if (message.content === process.env.INVOCATION_STRING) {
       // console.log(message)
 
+      const guild = message.guild
+      const guildMember = message.member
+
       // Check bot is set up properly
       if (!message.guild.me.hasPermission(['MANAGE_ROLES']))
         return message.channel.send(DISCORD_INVALID_PERMISSIONS)
 
-      // Check user already has role
-      const guild = message.guild
-      const guildMember = message.member
-
       // TODO: Remove/change after decisions are made re: role names
+      // Check user already has role
       // const role = guild.roles.cache.find((role) => role.name === UNLOCKED_ROLE)
       // if (guildMember.roles.cache.has(role.id))
       //   return message.reply(`${DISCORD_ALREADY_HAVE_ROLE} "${UNLOCKED_ROLE}"`)
@@ -85,7 +85,7 @@ discordClient.on('message', async (message) => {
             checkNftAndAssignRoles({
               message: sentMessage,
               guildMember,
-              roleId: role.id,
+              guild,
             })
           } else {
             // Denied consent
