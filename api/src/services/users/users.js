@@ -7,7 +7,7 @@ export const users = () => {
 }
 
 export const user = ({ id }) => {
-  return db.user.findUnique({
+  return db.user.findOne({
     where: { id },
   })
 }
@@ -17,7 +17,7 @@ export const userByDiscordId = async ({ discordId }) => {
   // await db.user.delete({
   //   where: { discordId },
   // })
-  let user = await db.user.findUnique({
+  let user = await db.user.findOne({
     where: { discordId },
   })
   if (user) console.log(`User "${discordId}" found.`)
@@ -61,7 +61,7 @@ export const deleteUser = ({ id }) => {
 
 export const User = {
   authDetail: (_obj, { root }) =>
-    db.user.findUnique({ where: { id: root.id } }).authDetail(),
+    db.user.findOne({ where: { id: root.id } }).authDetail(),
   nftsOwned: (_obj, { root }) =>
-    db.user.findUnique({ where: { id: root.id } }).nftsOwned(),
+    db.user.findOne({ where: { id: root.id } }).nftsOwned(),
 }
