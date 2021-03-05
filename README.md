@@ -13,7 +13,7 @@
 - **API server** RedwoodJS API in `/api`
 - **(incomplete) Frontend** RedwoodJS web app in `/web`
 
-## Usage
+## Fork it & make your own
 
 ### Create a new Discord Bot
 
@@ -39,10 +39,11 @@ cd bot && yarn start
 
 ### Add the bot to your server
 
-In the Discord Application, in "General Information", copy the `CLIENT ID`. Insert it in this URL, and send it to the server admin.
+In the Discord Application, in "General Information", copy the `CLIENT ID`. Insert it in this URL, and have the server administrator open it.
 
 ```
-https://discord.com/oauth2/authorize?client_id=<clientID>&scope=bot
+# Add the bot with role management permissions
+https://discord.com/oauth2/authorize?client_id=<clientID>&scope=bot&permissions=268435456
 ```
 
 ### Going to Production - Heroku
@@ -76,6 +77,10 @@ source .env
 # Start in "detached" mode
 docker-compose up -d
 ```
+
+## Notes
+
+Helpful discord docs for making a "emoji-reaction" menu https://discordjs.guide/popular-topics/reactions.html#awaiting-reactions
 
 ## Author
 

@@ -3,15 +3,13 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const { HttpLink } = require('apollo-link-http')
 const fetch = require('cross-fetch')
 const { userByDiscordId } = require('./graphql-operations/queries')
-const DEFAULT_URL = 'http://localhost:8911/graphql'
 
 class ApiMgr {
   constructor() {
-    const url = DEFAULT_URL
     const debug = true
     const cache = new InMemoryCache()
     const link = new HttpLink({
-      uri: url,
+      uri: process.env.API_URL,
       fetch,
     })
     this.client = new ApolloClient({

@@ -1,7 +1,7 @@
-const DISCORD_SERVER_ERROR = 'Whoops... we had an internal issue'
-const DISCORD_SUCCESS = `🤩 What fantastic NFTs you have!
-I gave you some new roles. Head back to your server to use them. 👋 See ya`
-const DISCORD_FAIL = `🤔 We couldn't find the relevant NFTs in your wallet. If you believe this is an error, contact us: https://twitter.com/pi0neerpat`
+const DISCORD_SERVER_ERROR = `⛈️ Sorry, something went wrong.`
+const DISCORD_SUCCESS = `Success! What fantastic NFTs you have 🤩
+I gave you a new role, enjoy!`
+const DISCORD_FAIL = `🤔 I couldn't find the relevant NFTs in your wallet. If you believe this is an error, contact us: https://twitter.com/pi0neerpat`
 const DISCORD_REPLY = `Please check your DMs`
 const DISCORD_INITIAL_PROMPT = `👋 Hi there! Let's take a look at your NFTs.\n\nIn order to continue, you need to give the following permissions to the Unlock Protocol Bot:
 \n\`- Fetch your wallet address from your CollabLand account\`
@@ -9,8 +9,9 @@ const DISCORD_INITIAL_PROMPT = `👋 Hi there! Let's take a look at your NFTs.\n
 \nMake your choice by clicking a button:`
 const DISCORD_APPROVE_CONSENT = `Searching...`
 const DISCORD_DENY_CONSENT = `Ok, no problem. Goodbye!`
-const DISCORD_CONSENT_TIMEOUT = `👻 Ghosted! If you'd like to continue, you'll need to start over.
-In your server, type "${process.env.INVOCATION_STRING}"`
+const DISCORD_CONSENT_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over. In your server, type "${process.env.INVOCATION_STRING}"`
+const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. The admin must give me permission to manage roles.`
+const DISCORD_ALREADY_HAVE_ROLE = `👍 You already have the role `
 
 module.exports = {
   DISCORD_SERVER_ERROR,
@@ -21,4 +22,6 @@ module.exports = {
   DISCORD_APPROVE_CONSENT,
   DISCORD_DENY_CONSENT,
   DISCORD_CONSENT_TIMEOUT,
+  DISCORD_INVALID_PERMISSIONS,
+  DISCORD_ALREADY_HAVE_ROLE,
 }
