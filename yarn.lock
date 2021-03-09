@@ -2286,11 +2286,6 @@
   resolved "https://registry.npmjs.org/@redwoodjs/auth/-/auth-0.24.0.tgz#9cdbe56cb562d783d37a68fa2475d41573d54e67"
   integrity sha512-37Eq686kMe7q82Pnak0sDMOlrO+M7HegRZ3q8GNLfSv9sek291hs6r6igsL5B4zWUG9mFN2rPCU427FzxpsVCw==
 
-"@redwoodjs/auth@^0.26.2":
-  version "0.26.2"
-  resolved "https://registry.npmjs.org/@redwoodjs/auth/-/auth-0.26.2.tgz#ad22bae41ce6b37babe08a20ca14770025be7140"
-  integrity sha512-A7VRhz0FoxZYR85vnKaohl2wK4UuOVr7CMMhhkcVs1CRFZg61AGbARFWItggtkzg9NffTZPYs5Vd1K2OC3hCBw==
-
 "@redwoodjs/cli@^0.24.0":
   version "0.24.0"
   resolved "https://registry.npmjs.org/@redwoodjs/cli/-/cli-0.24.0.tgz#ee135f68709d6223e4ddd93d6d8bbeeeb602ca89"
@@ -2425,16 +2420,6 @@
   resolved "https://registry.npmjs.org/@redwoodjs/eslint-plugin-redwood/-/eslint-plugin-redwood-0.24.0.tgz#571c9222ab3f00a6ba0716f48934f74708ed2441"
   integrity sha512-WhhebCYDHHQl6l6H9wyAxyV2qpyUXbPzzKlPBHpsV4dGfRvFFjH1LJVc2ofn8amWJ77lhqdRmuH15dWbL2GJpQ==
 
-"@redwoodjs/forms@^0.26.2":
-  version "0.26.2"
-  resolved "https://registry.npmjs.org/@redwoodjs/forms/-/forms-0.26.2.tgz#867155cf0f0bc925692bdde86ea64c043bcc8384"
-  integrity sha512-IhlRxV6AcIWgU9Hqfy3dJ+DbzWgAlHoD+gjUXOGF5HuN8XvQTCkAthbkZdCVO21eQxVC3FeEeoByyrJ3si9+2g==
-  dependencies:
-    "@types/pascalcase" "^1.0.0"
-    core-js "3.6.5"
-    pascalcase "1.0.0"
-    react-hook-form "^6.9.5"
-
 "@redwoodjs/internal@^0.24.0":
   version "0.24.0"
   resolved "https://registry.npmjs.org/@redwoodjs/internal/-/internal-0.24.0.tgz#d4986781ffafa96e81c2245b0445e6c9a81321de"
@@ -2452,15 +2437,6 @@
   integrity sha512-IDY2cKfd2hfry5BKfwyiu5c6Wppn5Twf4Iz2Y9T6a2+YLo9hJ8Su3yIjWHf4A15Qzpy4WGlgIKy2797qxd0yhQ==
   dependencies:
     "@redwoodjs/auth" "^0.24.0"
-    core-js "3.6.5"
-    lodash.isequal "^4.5.0"
-
-"@redwoodjs/router@^0.26.2":
-  version "0.26.2"
-  resolved "https://registry.npmjs.org/@redwoodjs/router/-/router-0.26.2.tgz#c0ff336fbbd5a4143b55f2e17390ff9e7f031f02"
-  integrity sha512-AgmFvkopKi9jNEFSdsBMuauCYIwLd6R34OwCn043PZdrFWxp3TyHrub0LmM89gyCXM0g3lpmCZGd67wftdFZLQ==
-  dependencies:
-    "@redwoodjs/auth" "^0.26.2"
     core-js "3.6.5"
     lodash.isequal "^4.5.0"
 
@@ -2510,18 +2486,6 @@
   integrity sha512-6ScBQZrj5P2gPT+rvnjs+JNfCoSbRcIUv01Bd9hF0On2LVVG2kYzu8djxkg3b4U8TjdBUGr/Of1JhOs0bWqqJA==
   dependencies:
     "@apollo/client" "^3.2.5"
-    "@types/react" "16.9.53"
-    core-js "3.6.5"
-    graphql "^15.3.0"
-    proptypes "^1.1.0"
-
-"@redwoodjs/web@^0.26.2":
-  version "0.26.2"
-  resolved "https://registry.npmjs.org/@redwoodjs/web/-/web-0.26.2.tgz#86e792f1f154eeac9d6ccc9b0414e6980693c25f"
-  integrity sha512-TyyPwEpLFSvHmUT43264n62ovBAPHbMiOXwHCGZKpVsrlbDNvffWiqnswS4pqw6eGS3BnJcz2zI8T86fPz5Rag==
-  dependencies:
-    "@apollo/client" "^3.2.5"
-    "@redwoodjs/auth" "^0.26.2"
     "@types/react" "16.9.53"
     core-js "3.6.5"
     graphql "^15.3.0"
@@ -3326,11 +3290,6 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
-
-"@types/pascalcase@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@types/pascalcase/-/pascalcase-1.0.0.tgz#7f655b653e2ed207e282e13b6d2f4cfe5e93c5b1"
-  integrity sha512-GUljFjs6pnZuxxmStKR1uDWIcGQSVdmUedFfreyJGU0owXW096kvYxf+6T/e1I6r3N8gNrqk3PETHqZwlR2xVg==
 
 "@types/prettier@^2.0.0":
   version "2.2.2"
@@ -11761,15 +11720,15 @@ pascal-case@^3.1.1, pascal-case@^3.1.2:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
-pascalcase@1.0.0, pascalcase@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/pascalcase/-/pascalcase-1.0.0.tgz#d2fd7d73f2969606d2b56e17f5261be41c43c381"
-  integrity sha512-BSExi0rRnCHReJys6NocaK+cfTXNinAegfWBvr0JD3hiaEG7Nuc7r0CIdOJunXrs8gU/sbHQ9dxVAtiVQisjmg==
-
 pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
+
+pascalcase@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/pascalcase/-/pascalcase-1.0.0.tgz#d2fd7d73f2969606d2b56e17f5261be41c43c381"
+  integrity sha512-BSExi0rRnCHReJys6NocaK+cfTXNinAegfWBvr0JD3hiaEG7Nuc7r0CIdOJunXrs8gU/sbHQ9dxVAtiVQisjmg==
 
 path-browserify@0.0.1:
   version "0.0.1"
@@ -12468,7 +12427,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@^16.13.1, react-dom@^16.8.3:
+react-dom@^16.8.3:
   version "16.14.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -12518,11 +12477,6 @@ react-helmet-async@^1.0.2:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
-
-react-hook-form@^6.9.5:
-  version "6.15.4"
-  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-6.15.4.tgz#328003e1ccc096cd158899ffe7e3b33735a9b024"
-  integrity sha512-K+Sw33DtTMengs8OdqFJI3glzNl1wBzSefD/ksQw/hJf9CnOHQAU6qy82eOrh0IRNt2G53sjr7qnnw1JDjvx1w==
 
 react-hotkeys@2.0.0:
   version "2.0.0"
@@ -12600,7 +12554,7 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react@^16.13.1, react@^16.8.3:
+react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
