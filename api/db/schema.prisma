@@ -8,28 +8,49 @@ generator client {
   binaryTargets = "native"
 }
 
-model User {
-  id         String     @id @default(uuid())
-  address    String     @unique
-  discordId String @unique
-  authDetail AuthDetail?
-  nftsOwned Nft[] @relation(name:"nftsOwned")
-}
-
 model AuthDetail {
   id        String   @id @default(uuid())
   nonce     String
   timestamp DateTime @default(now())
 }
 
-model Nft {
+model User {
+  id         String     @id @default(uuid())
+  address    String     @unique
+  platformId String @unique
+  platform String
+  authDetail AuthDetail?
+  guilds Guild[] @relation(name: "userGuilds")
+  roles Role[] @relation(name: "userRoles")
+}
+
+model Guild {
+  platformId String @id
+  name String
+  description String?
+  roles Role[] @relation(name: "guildRoles")
+  users User[] @relation(name: "userGuilds")
+}
+
+model Role {
+  id String @id @default(uuid())
+  guild Guild @relation(name: "guildRoles")
+  name String
+  platformId String
+  description String?
+  token Token
+  balance String
+  users User[] @relation(name: "userRoles")
+}
+
+model Token {
   id        String   @id @default(uuid())
-  website String?
-  contractAddress String?
-  tokenId Int
-  uri String @default("")
-  iconUrl String?
   chainId Int
-  owner     User     @relation(name:"nftsOwned", fields: [ownerAddress], references: [address])
-  ownerAddress  String
+  contractAddress String
+  type String // erc721 or erc20
+  tokenId Int? // only for erc721
+  uri String? // only for erc721
+  website String?
+  iconUrl String?
+  purchaseUrl String?
 }
