@@ -43,7 +43,6 @@ class ApiMgr {
 
   async updateRole(input) {
     try {
-      console.log(input)
       await this.client.mutate({
         mutation: updateRole,
         variables: { ...input },

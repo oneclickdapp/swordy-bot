@@ -1,7 +1,7 @@
 export const schema = gql`
   type Token {
     id: String!
-    chainId: Int!
+    chainId: String!
     contractAddress: String!
     type: String!
     tokenId: Int
@@ -17,7 +17,7 @@ export const schema = gql`
   }
 
   input CreateTokenInput {
-    chainId: Int!
+    chainId: String!
     contractAddress: String!
     type: String!
     tokenId: Int
@@ -28,7 +28,7 @@ export const schema = gql`
   }
 
   input UpdateTokenInput {
-    chainId: Int
+    chainId: String
     contractAddress: String
     type: String
     tokenId: Int

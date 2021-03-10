@@ -43,16 +43,16 @@ model Role {
   token Token
   balance String
   users User[] @relation(name: "userRoles")
+  purchaseUrl String?
 }
 
 model Token {
   id        String   @id @default(uuid())
-  chainId Int
+  chainId String
   contractAddress String
   type String // erc721 or erc20
   tokenId Int? // only for erc721
   uri String? // only for erc721
   website String?
   iconUrl String?
-  purchaseUrl String?
 }

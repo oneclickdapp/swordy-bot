@@ -32,7 +32,7 @@ export const updateRoleByBot = async ({
     })
 
   // Create token
-  let token = await db.token.findOne({
+  let token = await db.token.findFirst({
     where: {
       contractAddress,
       chainId,
@@ -40,7 +40,7 @@ export const updateRoleByBot = async ({
   })
   if (!token) {
     // TODO: Add check for token type
-    token = await sb.token.create({
+    token = await db.token.create({
       data: {
         chainId,
         contractAddress,
@@ -49,5 +49,24 @@ export const updateRoleByBot = async ({
     })
   }
   // Create role
-  return db.role.findMany()
+  let role = await db.role.findFirst({
+    where: {
+      platformId: rolePlatformId,
+      guild: {
+        platformId: guildPlatformId,
+      },
+    },
+  })
+  if (!role)
+    role = await db.role.create({
+      data: {
+        platformId: rolePlatformId,
+        name: roleName,
+        guild: { connect: { platformId: guildPlatformId } },
+        token: { connect: { id: token.id } },
+        balance,
+        purchaseUrl,
+      },
+    })
+  return role
 }

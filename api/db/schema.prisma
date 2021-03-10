@@ -48,7 +48,7 @@ model Role {
 
 model Token {
   id        String   @id @default(uuid())
-  chainId Int
+  chainId String
   contractAddress String
   type String // erc721 or erc20
   tokenId Int? // only for erc721
