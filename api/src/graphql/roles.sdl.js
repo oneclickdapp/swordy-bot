@@ -16,6 +16,23 @@ export const schema = gql`
     roles: [Role!]!
   }
 
+  type Mutation {
+    updateRoleByBot(
+      platform: String!
+      guildPlatformId: String!
+      guildName: String!
+      guildDescription: String
+      guildIconUrl: String!
+      roleName: String!
+      rolePlatformId: String!
+      roleDescription: String
+      balance: String!
+      chainId: String!
+      contractAddress: String!
+      purchaseUrl: String!
+    ): Role!
+  }
+
   input CreateRoleInput {
     name: String!
     platformId: String!

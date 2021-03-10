@@ -15,8 +15,12 @@ const DISCORD_ABOUT_BOT =
 const DISCORD_APPROVE_CONSENT = `Searching...`
 const DISCORD_DENY_CONSENT = `Ok, no problem. Goodbye!`
 const DISCORD_CONSENT_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over. In your server, type "${process.env.INVOCATION_STRING}"`
-const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. The admin must give me permission to manage roles.`
+const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. Someone must have revoked my permission to manage roles.`
 const DISCORD_ALREADY_HAVE_ROLE = `You already have the role `
+const DISCORD_GUILD_DOESNT_HAVE_ROLE = `This role does not exist. Please create it first.`
+const INVALID_ETHEREUM_ADDRESS = 'The ethereum address you provided is invalid.'
+const ADMIN_PROPER_SYNTAX =
+  'The proper syntax is: \n`<chain ID> <contract address> <required balance> <role rame> <purchase url (optional)>`\neg. `100 0x30D7b586F4fbd52ce164C1c204DD33BE49F53c7B 1 unlock-holder https://unlock-protocol.com/myNft`'
 
 module.exports = {
   DISCORD_SERVER_ERROR,
@@ -32,4 +36,7 @@ module.exports = {
   DISCORD_CONSENT_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,
   DISCORD_ALREADY_HAVE_ROLE,
+  DISCORD_GUILD_DOESNT_HAVE_ROLE,
+  INVALID_ETHEREUM_ADDRESS,
+  ADMIN_PROPER_SYNTAX,
 }

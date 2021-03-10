@@ -1,6 +1,6 @@
 datasource DS {
   provider =  ["postgresql","sqlite"]
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -43,7 +43,6 @@ model Role {
   token Token
   balance String
   users User[] @relation(name: "userRoles")
-  purchaseUrl String?
 }
 
 model Token {
@@ -55,4 +54,5 @@ model Token {
   uri String? // only for erc721
   website String?
   iconUrl String?
+  purchaseUrl String?
 }

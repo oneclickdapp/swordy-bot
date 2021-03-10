@@ -3,6 +3,7 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const { HttpLink } = require('apollo-link-http')
 const fetch = require('cross-fetch')
 const { userByDiscordId } = require('./graphql-operations/queries')
+const { updateRole } = require('./graphql-operations/mutations')
 
 class ApiMgr {
   constructor() {
@@ -37,6 +38,20 @@ class ApiMgr {
     } catch (e) {
       console.log(e)
       return { error: e }
+    }
+  }
+
+  async updateRole(input) {
+    try {
+      console.log(input)
+      await this.client.mutate({
+        mutation: updateRole,
+        variables: { ...input },
+      })
+    } catch (e) {
+      console.log(e)
+      throw new Error(e)
+      // return { error: e }
     }
   }
 }
