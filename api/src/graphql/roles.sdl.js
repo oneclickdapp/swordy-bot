@@ -8,8 +8,8 @@ export const schema = gql`
     token: Token!
     balance: String!
     users: [User]!
-    guildPlatformId: String!
-    tokenId: String!
+    purchaseUrl: String
+    isWorthy: Boolean
   }
 
   type Query {
@@ -18,8 +18,8 @@ export const schema = gql`
   }
 
   input rolesByUserAndGuildInput {
-    guildId: String
-    platformId: String
+    guildId: String!
+    platformId: String!
   }
 
   type Mutation {

@@ -78,23 +78,23 @@ const handleInvoke = async (message) => {
     message.reply(DISCORD_REPLY)
 
     // Start DM with user
-    await message.author.send(DISCORD_CHECKING_ACCOUNT)
+    let lastBotMessage = await message.author.send(DISCORD_CHECKING_ACCOUNT)
 
     const haveUserAddress = await apiMgr.haveUserAddress({
       platformId: message.author.id,
     })
     if (haveUserAddress)
       return checkNftAndAssignRoles({
-        message: sentMessage,
+        message: lastBotMessage,
         guildMember,
         guild,
       })
     // Otherwise do auth flow
 
     // Start DM with user
-    const sentMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
-    await sentMessage.react('❌')
-    await sentMessage.react('✅')
+    lastBotMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
+    await lastBotMessage.react('❌')
+    await lastBotMessage.react('✅')
 
     // Wait for Emoji reply
     const filter = (reaction, user) => {
@@ -103,26 +103,26 @@ const handleInvoke = async (message) => {
         user.id === message.author.id
       )
     }
-    sentMessage
+    lastBotMessage
       .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
       .then((collected) => {
         const reaction = collected.first()
         if (reaction.emoji.name === '✅') {
           // Approved consent
           checkNftAndAssignRoles({
-            message: sentMessage,
+            message: lastBotMessage,
             guildMember,
             guild,
           })
         } else {
           // Denied consent
-          sentMessage.reply(DISCORD_DENY_CONSENT)
+          lastBotMessage.reply(DISCORD_DENY_CONSENT)
         }
       })
       .catch((collected) => {
         console.log(collected)
         console.log(`Timeout for emoji response ${sentMessage.author}`)
-        sentMessage.reply(DISCORD_CONSENT_TIMEOUT)
+        lastBotMessage.reply(DISCORD_CONSENT_TIMEOUT)
       })
   } catch (e) {
     console.log(e)

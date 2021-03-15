@@ -13,6 +13,13 @@ export const user = ({ id }) => {
   })
 }
 
+export const haveUserAddress = async ({ platformId }) => {
+  let haveUserAddress = false
+  const userAddress = await db.user.findOne({ where: { platformId } }).address
+  if (userAddress) haveUserAddress = true
+  return { haveUserAddress }
+}
+
 export const userByDiscordId = async ({ discordId }) => {
   // DELETE ME only for testing purposes
   // await db.user.delete({

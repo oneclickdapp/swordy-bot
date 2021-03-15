@@ -8,9 +8,14 @@ export const schema = gql`
     authDetailId: String
   }
 
+  type HaveUserAddress {
+    haveUserAddress: Boolean!
+  }
+
   type Query {
     users: [User!]!
     user(id: String!): User
+    haveUserAddress(platformId: String!): HaveUserAddress
     userByDiscordId(discordId: String!): User
   }
 

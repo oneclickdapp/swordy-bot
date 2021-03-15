@@ -32,11 +32,11 @@ class ApiMgr {
 
   async haveUserAddress({ platformId }) {
     try {
-      const res = this.client.query({
+      const res = await this.client.query({
         query: haveUserAddress,
         variables: { platformId },
       })
-      return { roles: res.data.haveUserAddress }
+      return res.data.haveUserAddress
     } catch (e) {
       console.log(e)
       throw new Error(e)
@@ -44,13 +44,14 @@ class ApiMgr {
   }
 
   async getRolesByUserAndGuild({ platformId, guildId }) {
-    if (!discordId || !platformId) throw new Error('no platformId or guildId')
+    if (!guildId || !platformId) throw new Error('no platformId or guildId')
     try {
-      const res = this.client.query({
+      const res = await this.client.query({
         query: rolesByUserAndGuild,
         variables: { platformId, guildId },
       })
-      return { roles: res.data.userRolesForGuild.roles }
+      console.log(res)
+      return { roles: res.data.rolesByUserAndGuild.roles }
     } catch (e) {
       console.log(e)
       throw new Error(e)

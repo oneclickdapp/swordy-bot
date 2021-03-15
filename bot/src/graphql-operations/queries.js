@@ -27,7 +27,7 @@ const haveUserAddress = gql`
 
 const rolesByUserAndGuild = gql`
   query ROLES_BY_USER_AND_GUILD($guildId: String!, $platformId: String!) {
-    rolesByUserAndGuild(guildId: $guildId, platformId: $platformId) {
+    rolesByUserAndGuild(input: { guildId: $guildId, platformId: $platformId }) {
       id
       name
       description
@@ -38,7 +38,7 @@ const rolesByUserAndGuild = gql`
         contractAddress
         type
         website
-        icon
+        iconUrl
       }
       isWorthy
     }

@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 
 const { handleInvoke } = require('./commands/invoke')
 const { handleAdminUpdate } = require('./commands/admin')
-
+const { DISCORD_NO_DM_INVOCATION } = require('./textContent')
 const discordClient = new Discord.Client()
 
 discordClient.once('ready', async () => {
@@ -11,8 +11,11 @@ discordClient.once('ready', async () => {
 })
 
 discordClient.on('message', async (message) => {
-  if (process.env.INVOCATION_STRING.split(',').includes(message.content))
+  if (process.env.INVOCATION_STRING.split(',').includes(message.content)) {
+    if (message.channel.type == 'dm')
+      return message.reply(DISCORD_NO_DM_INVOCATION)
     handleInvoke(message)
+  }
   if (message.content.startsWith('!add-lock')) handleAdminUpdate(message)
 })
 

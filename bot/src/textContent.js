@@ -22,7 +22,7 @@ const INVALID_ETHEREUM_ADDRESS = 'The ethereum address you provided is invalid.'
 const ADMIN_PROPER_SYNTAX =
   'The proper syntax is: \n`<chain ID> <contract address> <required balance> <role rame> <purchase url (optional)>`\neg. `100 0x30D7b586F4fbd52ce164C1c204DD33BE49F53c7B 1 unlock-holder https://unlock-protocol.com/myNft`'
 const DISCORD_CHECKING_ACCOUNT = 'Looking up your account, one moment...'
-
+const DISCORD_NO_DM_INVOCATION = 'Sorry, you can only do that from a server'
 module.exports = {
   DISCORD_SERVER_ERROR,
   DISCORD_SUCCESS_START,
@@ -41,4 +41,5 @@ module.exports = {
   INVALID_ETHEREUM_ADDRESS,
   ADMIN_PROPER_SYNTAX,
   DISCORD_CHECKING_ACCOUNT,
+  DISCORD_NO_DM_INVOCATION,
 }
