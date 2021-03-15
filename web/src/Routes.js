@@ -14,12 +14,7 @@ const Routes = () => {
     <Router>
       <Route path="/about" page={AboutPage} name="about" />
       <Route path="/" page={HomePage} name="home" />
-      <Route path="/games/new" page={NewGamePage} name="newGame" />
-      <Route path="/games/{id}/edit" page={EditGamePage} name="editGame" />
-      <Route path="/games/{id}" page={GamePage} name="game" />
-      <Route path="/games" page={GamesPage} name="games" />
       <Route path="/login" page={LoginPage} name="login" />
-      <Route path="/users/{address}" page={UserPage} name="user" />
       <Route notfound page={NotFoundPage} />
     </Router>
   )
