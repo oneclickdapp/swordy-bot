@@ -1,15 +1,27 @@
 import { db } from 'src/lib/db'
+import { checkWorthiness } from 'src/lib/token'
 
 export const roles = () => {
   return db.role.findMany()
 }
 
-export const rolesByUserAndGuild = async ({input}) => {
-  const { platformId, guildId }  = input
-  const user = await db.user.findFirst({where: {platformId}})
-  // Map all roles for guild
-  // Check if user has them
-  return db.role.
+export const rolesByUserAndGuild = async ({ input }) => {
+  const { platformId, guildId } = input
+  const user = await db.user.findFirst({ where: { platformId } })
+  const { address: userAddress } = user
+  const roles = await db.guild.findFirst({ where: { guildId } }).roles()
+  await Promise.all(
+    roles.map(async (role, index) => {
+      console.log(role.name)
+      const token = await role.token()
+      roles[index].isWorthy = await checkWorthiness({
+        token,
+        balance: role.balance,
+        userAddress,
+      })
+    })
+  )
+  return roles
 }
 
 export const updateRoleByBot = async ({

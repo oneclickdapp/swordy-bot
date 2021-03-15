@@ -5,6 +5,7 @@
   "dependencies": {
     "@ethersproject/contracts": "^5.0.11",
     "@ethersproject/providers": "^5.0.23",
+    "@ethersproject/units": "^5.0.11",
     "@redwoodjs/api": "^0.24.0"
   },
   "resolutions": {
