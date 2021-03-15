@@ -76,7 +76,11 @@ const HomePage = () => {
                 2. Set the required token balances
                 <br />
                 3. Bot will automatically grant roles
-                <Link className="text-blue" to="about">
+                <br />
+                <Link
+                  className="hover:underline bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg"
+                  to="about"
+                >
                   Learn more
                 </Link>
                 <br />
@@ -214,15 +218,13 @@ const HomePage = () => {
       {/* CTA block */}
       <section className="container flex-grow py-32 mx-auto text-center ">
         <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-          Add to your Server
+          Get started
         </h2>
         <div className="w-full mb-4">
           <div className="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
 
-        <h3 className="my-4 text-3xl leading-tight">
-          Token-curated channels are a few clicks away
-        </h3>
+        <h3 className="my-4 text-3xl leading-tight">Only a few clicks away</h3>
         <div className="mt-8">
           <a
             href={ADD_BOT_LINK}
