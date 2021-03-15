@@ -10,6 +10,9 @@ const DISCORD_REPLY = `You think you're worthy? Check your DMs`
 const DISCORD_INITIAL_PROMPT = `⚔️ Ready to be knighted? \n\nTo continue, I need the following permissions:
 \n-\`Fetch your wallet address from your CollabLand account\`
 \n If you agree, click the ✅`
+const DISCORD_INITIAL_AUTH = `⚔️ Ready to be knighted? \n\nJust one more thing I need from you:
+\n-\`Ethereum wallet address\`
+\n Click the link to login using your wallet:\n`
 const DISCORD_ABOUT_BOT =
   '*Swordy is a community-maintained project by @pi0neerpat*'
 const DISCORD_APPROVE_CONSENT = `Searching...`
@@ -31,6 +34,7 @@ module.exports = {
   DISCORD_FAIL,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
+  DISCORD_INITIAL_AUTH,
   DISCORD_ABOUT_BOT,
   DISCORD_APPROVE_CONSENT,
   DISCORD_DENY_CONSENT,

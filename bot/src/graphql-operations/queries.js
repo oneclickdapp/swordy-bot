@@ -24,6 +24,13 @@ const haveUserAddress = gql`
     }
   }
 `
+const userByPlatformId = gql`
+  query USER($platformId: String!, $platform: String!) {
+    userByPlatformId(platformId: $platformId, platform: $platform) {
+      id
+    }
+  }
+`
 
 const rolesByUserAndGuild = gql`
   query ROLES_BY_USER_AND_GUILD($guildId: String!, $platformId: String!) {
@@ -44,4 +51,4 @@ const rolesByUserAndGuild = gql`
     }
   }
 `
-module.exports = { rolesByUserAndGuild, haveUserAddress }
+module.exports = { rolesByUserAndGuild, haveUserAddress, userByPlatformId }

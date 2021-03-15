@@ -5,6 +5,7 @@ const fetch = require('cross-fetch')
 const {
   rolesByUserAndGuild,
   haveUserAddress,
+  userByPlatformId,
 } = require('./graphql-operations/queries')
 const { updateRole } = require('./graphql-operations/mutations')
 
@@ -37,6 +38,20 @@ class ApiMgr {
         variables: { platformId },
       })
       return res.data.haveUserAddress.haveUserAddress
+    } catch (e) {
+      console.log(e)
+      throw new Error(e)
+    }
+  }
+
+  async userByPlatformId({ platformId, platform }) {
+    try {
+      const res = await this.client.query({
+        query: userByPlatformId,
+        variables: { platformId, platform },
+      })
+      console.log(res.data)
+      return res.data.userByPlatformId
     } catch (e) {
       console.log(e)
       throw new Error(e)

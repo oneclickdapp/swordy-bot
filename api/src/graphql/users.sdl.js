@@ -13,10 +13,15 @@ export const schema = gql`
     haveUserAddress: Boolean!
   }
 
+  type LimitedScopeUser {
+    id: String
+  }
+
   type Query {
     users: [User!]!
     user(id: String!): User
     haveUserAddress(platformId: String!): HaveUserAddress
+    userByPlatformId(platformId: String!, platform: String!): LimitedScopeUser
     userByDiscordId(discordId: String!): User
   }
 

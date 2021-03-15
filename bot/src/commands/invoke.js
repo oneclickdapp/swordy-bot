@@ -12,6 +12,7 @@ const {
   DISCORD_FAIL,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
+  DISCORD_INITIAL_AUTH,
   DISCORD_APPROVE_CONSENT,
   DISCORD_DENY_CONSENT,
   DISCORD_CONSENT_TIMEOUT,
@@ -22,7 +23,7 @@ const {
 
 const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
 const CHIEV_ROLE_BASE = 'one-snoo-club'
-
+const LOGIN_URL = `${process.env.LOGIN_URL}?id=`
 const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   try {
     await message.reply(DISCORD_APPROVE_CONSENT)
@@ -100,8 +101,11 @@ const doCollabAuth = async ({ message, lastBotMessage }) => {
 }
 
 const doSwordyAuth = async ({ message, lastBotMessage }) => {
-  lastBotMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
-  // send the platformId, platform, guildId
+  const user = await apiMgr.userByPlatformId({
+    platformId: message.author.id,
+    platform: 'discord',
+  })
+  await lastBotMessage.reply(DISCORD_INITIAL_AUTH + LOGIN_URL + user.id)
 }
 
 const handleInvoke = async (message) => {

@@ -13,6 +13,20 @@ export const user = ({ id }) => {
   })
 }
 
+export const userByPlatformId = async ({ platformId, platform }) => {
+  let user = await db.user.findFirst({
+    where: { platformId },
+  })
+  if (!user)
+    user = await db.user.create({
+      data: {
+        platformId,
+        platform,
+      },
+    })
+  return user
+}
+
 export const haveUserAddress = async ({ platformId }) => {
   let haveUserAddress = false
   const userAddress = await db.user.findOne({ where: { platformId } }).address
