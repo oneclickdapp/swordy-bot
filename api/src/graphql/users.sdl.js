@@ -1,11 +1,12 @@
 export const schema = gql`
   type User {
     id: String!
-    address: String!
-    discordId: String!
+    address: String
+    platformId: String!
+    platform: String!
     authDetail: AuthDetail
-    nfts: [Nft]!
-    authDetailId: String
+    guild: [Guild!]!
+    roles: [Role!]!
   }
 
   type HaveUserAddress {
@@ -20,8 +21,9 @@ export const schema = gql`
   }
 
   input CreateUserInput {
-    address: String!
-    discordHandle: String!
+    address: String
+    platformId: String!
+    platform: String!
     authDetailId: String
   }
 

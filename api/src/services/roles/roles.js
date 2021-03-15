@@ -21,6 +21,9 @@ export const rolesByUserAndGuild = async ({ input }) => {
       })
     })
   )
+  // TODO: Update user roles to add/remove
+  // TODO: update user guild membership
+  // TODO: update guild roles available/unavailable
   return roles
 }
 

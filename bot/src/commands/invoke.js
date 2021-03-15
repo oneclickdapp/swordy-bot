@@ -38,12 +38,12 @@ const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
       roles.map(async (role) => {
         if (!role.isWorthy) return
         // Check if the role still exists in the guild
+        // TODO: Update guild earlier during the process
+        // to avoid needing to do this
         const existingRole = guild.roles.cache.find(
           (guildRole) => guildRole.id === role.platformId
         )
         if (!existingRole)
-          // TODO: Update guild earlier during the process
-          // to avoid the need for this
           return console.log(
             `Role "${role.name}" does not exist for this guild.`
           )
@@ -64,6 +64,46 @@ const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   }
 }
 
+const doCollabAuth = async ({ message, lastBotMessage }) => {
+  lastBotMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
+  await lastBotMessage.react('❌')
+  await lastBotMessage.react('✅')
+
+  // Wait for Emoji reply
+  const filter = (reaction, user) => {
+    return (
+      ['❌', '✅'].includes(reaction.emoji.name) &&
+      user.id === message.author.id
+    )
+  }
+  lastBotMessage
+    .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+    .then((collected) => {
+      const reaction = collected.first()
+      if (reaction.emoji.name === '✅') {
+        // Approved consent
+        checkNftAndAssignRoles({
+          message: lastBotMessage,
+          guildMember,
+          guild,
+        })
+      } else {
+        // Denied consent
+        lastBotMessage.reply(DISCORD_DENY_CONSENT)
+      }
+    })
+    .catch((collected) => {
+      console.log(collected)
+      console.log(`Timeout for emoji response ${sentMessage.author}`)
+      lastBotMessage.reply(DISCORD_CONSENT_TIMEOUT)
+    })
+}
+
+const doSwordyAuth = async ({ message, lastBotMessage }) => {
+  lastBotMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
+  // send the platformId, platform, guildId
+}
+
 const handleInvoke = async (message) => {
   // console.log(message)
   try {
@@ -76,7 +116,6 @@ const handleInvoke = async (message) => {
 
     // Tell user to check DMs
     message.reply(DISCORD_REPLY)
-
     // Start DM with user
     let lastBotMessage = await message.author.send(DISCORD_CHECKING_ACCOUNT)
 
@@ -89,41 +128,11 @@ const handleInvoke = async (message) => {
         guildMember,
         guild,
       })
+
     // Otherwise do auth flow
-
-    // Start DM with user
-    lastBotMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
-    await lastBotMessage.react('❌')
-    await lastBotMessage.react('✅')
-
-    // Wait for Emoji reply
-    const filter = (reaction, user) => {
-      return (
-        ['❌', '✅'].includes(reaction.emoji.name) &&
-        user.id === message.author.id
-      )
-    }
-    lastBotMessage
-      .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-      .then((collected) => {
-        const reaction = collected.first()
-        if (reaction.emoji.name === '✅') {
-          // Approved consent
-          checkNftAndAssignRoles({
-            message: lastBotMessage,
-            guildMember,
-            guild,
-          })
-        } else {
-          // Denied consent
-          lastBotMessage.reply(DISCORD_DENY_CONSENT)
-        }
-      })
-      .catch((collected) => {
-        console.log(collected)
-        console.log(`Timeout for emoji response ${sentMessage.author}`)
-        lastBotMessage.reply(DISCORD_CONSENT_TIMEOUT)
-      })
+    // Callback from auth flow will trigger the next step
+    // return doCollabAuth({message, lastBotMessage})
+    return doSwordyAuth({ message, lastBotMessage })
   } catch (e) {
     console.log(e)
     message.reply(DISCORD_SERVER_ERROR)

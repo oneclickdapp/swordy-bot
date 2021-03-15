@@ -36,7 +36,7 @@ class ApiMgr {
         query: haveUserAddress,
         variables: { platformId },
       })
-      return res.data.haveUserAddress
+      return res.data.haveUserAddress.haveUserAddress
     } catch (e) {
       console.log(e)
       throw new Error(e)
@@ -46,11 +46,11 @@ class ApiMgr {
   async getRolesByUserAndGuild({ platformId, guildId }) {
     if (!guildId || !platformId) throw new Error('no platformId or guildId')
     try {
+      // TODO: send all guild roles, so we can remove them from db if they were deleted
       const res = await this.client.query({
         query: rolesByUserAndGuild,
         variables: { platformId, guildId },
       })
-      console.log(res)
       return { roles: res.data.rolesByUserAndGuild.roles }
     } catch (e) {
       console.log(e)
