@@ -3,8 +3,8 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const { HttpLink } = require('apollo-link-http')
 const fetch = require('cross-fetch')
 const {
-  userByDiscordId,
   rolesByUserAndGuild,
+  haveUserAddress,
 } = require('./graphql-operations/queries')
 const { updateRole } = require('./graphql-operations/mutations')
 
@@ -30,17 +30,30 @@ class ApiMgr {
     })
   }
 
-  async getRolesByUserAndGuild({ discordId, guildId }) {
-    if (!discordId || !guildId) throw new Error('no discordId or guildId')
+  async haveUserAddress({ platformId }) {
+    try {
+      const res = this.client.query({
+        query: haveUserAddress,
+        variables: { platformId },
+      })
+      return { roles: res.data.haveUserAddress }
+    } catch (e) {
+      console.log(e)
+      throw new Error(e)
+    }
+  }
+
+  async getRolesByUserAndGuild({ platformId, guildId }) {
+    if (!discordId || !platformId) throw new Error('no platformId or guildId')
     try {
       const res = this.client.query({
         query: rolesByUserAndGuild,
-        variables: { discordId, guildId },
+        variables: { platformId, guildId },
       })
       return { roles: res.data.userRolesForGuild.roles }
     } catch (e) {
       console.log(e)
-      return { error: e }
+      throw new Error(e)
     }
   }
 
@@ -54,7 +67,7 @@ class ApiMgr {
       return { nfts: user.data.userByDiscordId.nfts }
     } catch (e) {
       console.log(e)
-      return { error: e }
+      throw new Error(e)
     }
   }
 
@@ -67,7 +80,6 @@ class ApiMgr {
     } catch (e) {
       console.log(e)
       throw new Error(e)
-      // return { error: e }
     }
   }
 }

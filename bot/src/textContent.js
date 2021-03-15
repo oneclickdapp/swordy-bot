@@ -21,6 +21,7 @@ const DISCORD_GUILD_DOESNT_HAVE_ROLE = `This role does not exist. Please create 
 const INVALID_ETHEREUM_ADDRESS = 'The ethereum address you provided is invalid.'
 const ADMIN_PROPER_SYNTAX =
   'The proper syntax is: \n`<chain ID> <contract address> <required balance> <role rame> <purchase url (optional)>`\neg. `100 0x30D7b586F4fbd52ce164C1c204DD33BE49F53c7B 1 unlock-holder https://unlock-protocol.com/myNft`'
+const DISCORD_CHECKING_ACCOUNT = 'Looking up your account, one moment...'
 
 module.exports = {
   DISCORD_SERVER_ERROR,
@@ -39,4 +40,5 @@ module.exports = {
   DISCORD_GUILD_DOESNT_HAVE_ROLE,
   INVALID_ETHEREUM_ADDRESS,
   ADMIN_PROPER_SYNTAX,
+  DISCORD_CHECKING_ACCOUNT,
 }

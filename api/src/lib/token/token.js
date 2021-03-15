@@ -26,7 +26,9 @@ export const checkWorthiness = async ({ token, balance, userAddress }) => {
       tokenId,
       userAddress,
     })
-  return userBalance.gte(Bignumber.from(balance))
+  return true
+  // TODO: uncomment
+  // return userBalance.gte(Bignumber.from(balance))
 }
 
 const getErc721Balance = async ({

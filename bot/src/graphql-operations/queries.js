@@ -1,17 +1,26 @@
 const gql = require('graphql-tag')
 
-const userByDiscordId = gql`
-  query USER_BY_DISCORD_ID($discordId: String!) {
-    userByDiscordId(discordId: $discordId) {
-      id
-      nfts {
-        website
-        contractAddress
-        tokenId
-        uri
-        chainId
-        iconUrl
-      }
+// Old way - deleteme
+// const userByDiscordId = gql`
+//   query USER_BY_DISCORD_ID($discordId: String!) {
+//     userByDiscordId(discordId: $discordId) {
+//       id
+//       nfts {
+//         website
+//         contractAddress
+//         tokenId
+//         uri
+//         chainId
+//         iconUrl
+//       }
+//     }
+//   }
+// `
+
+const haveUserAddress = gql`
+  query HAVE_USER_ADDRESS($platformId: String!) {
+    haveUserAddress(platformId: $platformId) {
+      haveUserAddress
     }
   }
 `
@@ -35,4 +44,4 @@ const rolesByUserAndGuild = gql`
     }
   }
 `
-module.exports = { userByDiscordId }
+module.exports = { rolesByUserAndGuild, haveUserAddress }

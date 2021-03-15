@@ -17,40 +17,51 @@ const {
   DISCORD_CONSENT_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,
   DISCORD_ALREADY_HAVE_ROLE,
+  DISCORD_CHECKING_ACCOUNT,
 } = require('../textContent')
 
 const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
 const CHIEV_ROLE_BASE = 'one-snoo-club'
 
 const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
-  await message.reply(DISCORD_APPROVE_CONSENT)
-  const { nfts, error } = await apiMgr.getNfts(guildMember.id)
-  if (error) return message.reply(error)
-  console.log(nfts)
-  if (!nfts) return message.reply(DISCORD_FAIL)
-  await message.reply(DISCORD_SUCCESS_START)
-  await Promise.all(
-    nfts.map(async (nft) => {
-      let roleName = `${UNLOCKED_ROLE_BASE}-${nft.chainId}`
-      let unlockRole = guild.roles.cache.find((role) => role.name === roleName)
-      // TODO: Handle non-existent roles better
-      if (unlockRole) {
-        guildMember.roles.add(unlockRole.id)
-        await message.reply(DISCORD_SUCCESS_ACTION + `\`${roleName}\``)
-      }
-      console.log(`Role "${roleName}" does not exist for this guild.`)
+  try {
+    await message.reply(DISCORD_APPROVE_CONSENT)
 
-      roleName = `${CHIEV_ROLE_BASE}-${nft.chainId}`
-      console.log(roleName)
-      unlockRole = guild.roles.cache.find((role) => role.name === roleName)
-      // TODO: Handle non-existent roles better
-      if (!unlockRole)
-        return console.log(`Role "${roleName}" does not exist for this guild.`)
-      guildMember.roles.add(unlockRole.id)
-      await message.reply(DISCORD_SUCCESS_ACTION + `\`${roleName}\``)
+    const roles = await apiMgr.getRolesByUserAndGuild({
+      platformId: guildMember.id,
+      guildId: guild.id,
     })
-  )
-  await message.reply(DISCORD_SUCCESS_FINISH)
+    if (!roles) return message.reply(DISCORD_FAIL)
+
+    await message.reply(DISCORD_SUCCESS_START)
+    await Promise.all(
+      roles.map(async (role) => {
+        if (!role.isWorthy) return
+        // Check if the role still exists in the guild
+        const existingRole = guild.roles.cache.find(
+          (guildRole) => guildRole.id === role.platformId
+        )
+        if (!existingRole)
+          // TODO: Update guild earlier during the process
+          // to avoid the need for this
+          return console.log(
+            `Role "${role.name}" does not exist for this guild.`
+          )
+
+        guildMember.roles.add(role.id)
+        await message.reply(DISCORD_SUCCESS_ACTION + `\`${role.name}\``)
+      })
+    )
+    await message.reply(DISCORD_SUCCESS_FINISH)
+  } catch (e) {
+    console.log(e)
+    if (e.message.startsWith('#')) {
+      // User error, so reply with message
+      message.reply(e.message.slice(1))
+      return message.channel.send(ADMIN_PROPER_SYNTAX)
+    }
+    message.reply(DISCORD_SERVER_ERROR)
+  }
 }
 
 const handleInvoke = async (message) => {
@@ -63,14 +74,22 @@ const handleInvoke = async (message) => {
     if (!message.guild.me.hasPermission(['MANAGE_ROLES']))
       return message.channel.send(DISCORD_INVALID_PERMISSIONS)
 
-    // TODO: Remove/change after decisions are made re: role names
-    // Check user already has role
-    // const role = guild.roles.cache.find((role) => role.name === UNLOCKED_ROLE)
-    // if (guildMember.roles.cache.has(role.id))
-    //   return message.reply(`${DISCORD_ALREADY_HAVE_ROLE} "${UNLOCKED_ROLE}"`)
-
     // Tell user to check DMs
     message.reply(DISCORD_REPLY)
+
+    // Start DM with user
+    await message.author.send(DISCORD_CHECKING_ACCOUNT)
+
+    const haveUserAddress = await apiMgr.haveUserAddress({
+      platformId: message.author.id,
+    })
+    if (haveUserAddress)
+      return checkNftAndAssignRoles({
+        message: sentMessage,
+        guildMember,
+        guild,
+      })
+    // Otherwise do auth flow
 
     // Start DM with user
     const sentMessage = await message.author.send(DISCORD_INITIAL_PROMPT)
