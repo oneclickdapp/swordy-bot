@@ -2,7 +2,10 @@ const { ApolloClient } = require('apollo-client')
 const { InMemoryCache } = require('apollo-cache-inmemory')
 const { HttpLink } = require('apollo-link-http')
 const fetch = require('cross-fetch')
-const { userByDiscordId } = require('./graphql-operations/queries')
+const {
+  userByDiscordId,
+  rolesByUserAndGuild,
+} = require('./graphql-operations/queries')
 const { updateRole } = require('./graphql-operations/mutations')
 
 class ApiMgr {
@@ -25,6 +28,20 @@ class ApiMgr {
         },
       },
     })
+  }
+
+  async getRolesByUserAndGuild({ discordId, guildId }) {
+    if (!discordId || !guildId) throw new Error('no discordId or guildId')
+    try {
+      const res = this.client.query({
+        query: rolesByUserAndGuild,
+        variables: { discordId, guildId },
+      })
+      return { roles: res.data.userRolesForGuild.roles }
+    } catch (e) {
+      console.log(e)
+      return { error: e }
+    }
   }
 
   async getNfts(discordId) {

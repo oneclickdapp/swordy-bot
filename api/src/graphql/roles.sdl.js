@@ -14,6 +14,12 @@ export const schema = gql`
 
   type Query {
     roles: [Role!]!
+    rolesByUserAndGuild(input: rolesByUserAndGuildInput): [Role!]!
+  }
+
+  input rolesByUserAndGuildInput {
+    guildId: String
+    platformId: String
   }
 
   type Mutation {

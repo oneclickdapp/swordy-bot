@@ -4,6 +4,14 @@ export const roles = () => {
   return db.role.findMany()
 }
 
+export const rolesByUserAndGuild = async ({input}) => {
+  const { platformId, guildId }  = input
+  const user = await db.user.findFirst({where: {platformId}})
+  // Map all roles for guild
+  // Check if user has them
+  return db.role.
+}
+
 export const updateRoleByBot = async ({
   platform,
   guildPlatformId,
@@ -39,12 +47,12 @@ export const updateRoleByBot = async ({
     },
   })
   if (!token) {
-    // TODO: Add check for token type
     token = await db.token.create({
       data: {
         chainId,
         contractAddress,
-        type: 'erc720',
+        // TODO: Check contract for token type
+        type: 'erc721',
       },
     })
   }
