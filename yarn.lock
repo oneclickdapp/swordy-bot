@@ -2160,7 +2160,7 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@oneclickdapp/ethereum-auth@^0.2.0":
+"@oneclickdapp/ethereum-auth@^0.2.1":
   version "0.2.1"
   resolved "https://registry.npmjs.org/@oneclickdapp/ethereum-auth/-/ethereum-auth-0.2.1.tgz#b1f2895f82bbc3dd0be51707d4734957c74117d5"
   integrity sha512-jpyuaIHmtVdseD6Gn9slZjzEwP3x4nL2mMRDTerqlN3D4aLas5J/gFWw3pGrw5b6Wk/NYfoXCxIhMD2jUgAa0g==

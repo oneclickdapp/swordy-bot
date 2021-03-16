@@ -17,8 +17,8 @@ model AuthDetail {
 model User {
   id         String     @id @default(uuid())
   address    String?     @unique
-  platformId String @unique
-  platform String
+  platformId String? @unique
+  platform String?
   authDetail AuthDetail?
   guilds Guild[] @relation(name: "userGuilds")
   roles Role[] @relation(name: "userRoles")

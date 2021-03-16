@@ -2,8 +2,8 @@ export const schema = gql`
   type User {
     id: String!
     address: String
-    platformId: String!
-    platform: String!
+    platformId: String
+    platform: String
     authDetail: AuthDetail
     guild: [Guild!]!
     roles: [Role!]!
@@ -14,7 +14,7 @@ export const schema = gql`
   }
 
   type LimitedScopeUser {
-    id: String
+    id: String!
   }
 
   type Query {
