@@ -1,0 +1,58 @@
+datasource DS {
+  provider =  ["postgresql","sqlite"]
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model AuthDetail {
+  id        String   @id @default(uuid())
+  nonce     String
+  timestamp DateTime @default(now())
+}
+
+model User {
+  id         String     @id @default(uuid())
+  address    String?     @unique
+  platformId String? @unique
+  platform String?
+  authDetail AuthDetail?
+  guilds Guild[] @relation(name: "userGuilds")
+  roles Role[] @relation(name: "userRoles")
+}
+
+model Guild {
+  platformId String @id
+  platform String
+  name String
+  iconUrl String?
+  description String?
+  roles Role[] @relation(name: "guildRoles")
+  users User[] @relation(name: "userGuilds")
+}
+
+model Role {
+  id String @id @default(uuid())
+  guild Guild @relation(name: "guildRoles")
+  name String
+  platformId String
+  description String?
+  token Token
+  balance String
+  users User[] @relation(name: "userRoles")
+  purchaseUrl String?
+}
+
+model Token {
+  id        String   @id @default(uuid())
+  chainId String
+  contractAddress String
+  type String // erc721 or erc20
+  tokenId Int? // only for erc721
+  uri String? // only for erc721
+  website String?
+  iconUrl String?
+}

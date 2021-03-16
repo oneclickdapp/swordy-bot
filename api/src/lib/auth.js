@@ -6,7 +6,9 @@ import { db } from './db'
 // for how to add Role-based Access Control (RBAC) here.
 
 export const getCurrentUser = async (decoded) => {
-  return db.user.findOne({ where: { address: decoded.address.toLowerCase() } })
+  return db.user.findFirst({
+    where: { address: decoded.address.toLowerCase() },
+  })
 }
 
 // Use this function in your services to check that a user is logged in, and

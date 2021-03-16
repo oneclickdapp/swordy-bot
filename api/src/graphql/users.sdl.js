@@ -27,8 +27,8 @@ export const schema = gql`
 
   input CreateUserInput {
     address: String
-    platformId: String!
-    platform: String!
+    platformId: String
+    platform: String
     authDetailId: String
   }
 
