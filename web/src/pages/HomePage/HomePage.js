@@ -9,7 +9,7 @@ const HomePage = () => {
     <div className="text-white bg-gradient-to-r from-purple to-pink ">
       <section className="container flex-grow py-32 text-center ">
         <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-          ⚔️ Swordy Bot ⚔️
+          ⚔️ Swordy Bot
         </h1>
 
         <h3 className="my-4 text-3xl leading-tight">
