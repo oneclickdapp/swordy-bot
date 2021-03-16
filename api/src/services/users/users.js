@@ -27,6 +27,9 @@ export const mergeWithUser = async ({ id }) => {
     where: { id: user.id },
     data: { platform, platformId },
   })
+  // Call the bot to complete the flow
+  // BUT WE DONT KNOW WHAT GUILD THIS IS FOR NOW
+
   return { id: user.id }
 }
 
