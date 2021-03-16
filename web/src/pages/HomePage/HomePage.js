@@ -12,7 +12,7 @@ const HomePage = () => {
           ⚔️ Swordy Bot
         </h1>
         <h3 className="my-4 text-3xl leading-tight">
-          Your Kingdom - Your Rules
+          Your Kingdom - Your Roles
         </h3>
         <div className="mt-8">
           <a
@@ -71,11 +71,11 @@ const HomePage = () => {
               </h3>
               <div>
                 <p className="text-gray-600 text-xl mb-8">
-                  1. Create roles
+                  1. 🔐 Create roles
                   <br />
-                  2. Set token balances
+                  2. 💰 Set token balances
                   <br />
-                  3. Prosper
+                  3. 🏰 Thrive
                   <br />
                 </p>
               </div>
@@ -216,20 +216,20 @@ const HomePage = () => {
       {/* CTA block */}
       <section className="container flex-grow py-32 mx-auto text-center ">
         <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-          Get started
+          You decide who's worthy
         </h2>
         <div className="w-full mb-4">
           <div className="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
 
-        <h3 className="my-4 text-3xl leading-tight">Only a few clicks away</h3>
+        <h3 className="my-4 text-3xl leading-tight">Your kingdom is waiting</h3>
         <div className="mt-8">
           <a
             href={ADD_BOT_LINK}
             type="submit"
             className="hover:underline bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg"
           >
-            Add Bot
+            Get Started
           </a>
         </div>
       </section>
