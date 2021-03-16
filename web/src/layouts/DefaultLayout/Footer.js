@@ -38,11 +38,11 @@ const Footer = () => (
         icon={FaPepperHot}
         label="Cartel"
       />
-      {/*  <FooterLink
-        href={"https://discord.gg/Aa3WdzPH"}
+      <FooterLink
+        href={'https://discord.gg/Nw3y4GtBSh'}
         icon={FaDiscord}
         label="Discord"
-        />*/}
+      />
     </ul>
     <div className="mt-8 md:mt-0 md:order-1">
       <p className="text-center text-sm md:text-base text-gray-700">

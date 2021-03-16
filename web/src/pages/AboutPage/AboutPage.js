@@ -24,9 +24,20 @@ const AboutPage = () => {
         />
         <Detail
           title="How do I add it to my community?"
-          text="Right now only Discord is supported. Simple click the big button on the home page to add the bot to your server."
+          text="Right now only Discord is supported. Simply click the big button on the home page to add the bot to your server."
         />
-        <Detail title="How do I manage roles?" text="" />
+        <Detail
+          title="How do I manage roles?"
+          text='Roles are added using the "!add-role" command in your server.'
+        />
+        <Detail
+          title="How do I add roles using Unlock Protocol?"
+          text="The flow is the same. We'll automatically detect if your token is using the Unlock Protocl contracts."
+        />
+        <Detail
+          title="What tokens are supported?"
+          text="ERC721 NFTs baby! ERC20 too."
+        />
         {/*
         <Detail
           title="How do I manage roles?"

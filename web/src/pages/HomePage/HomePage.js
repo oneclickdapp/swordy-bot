@@ -70,23 +70,22 @@ const HomePage = () => {
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
                 How does it work?
               </h3>
-              <p className="text-gray-600 mb-8">
-                1. Create roles for your community
-                <br />
-                2. Set the required token balances
-                <br />
-                3. Bot will automatically grant roles
-                <br />
-                <Link
-                  className="hover:underline bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg"
-                  to="about"
-                >
-                  Learn more
-                </Link>
-                <br />
-                <br />
-                Create • Set • Enjoy
-              </p>
+              <div>
+                <p className="text-gray-600 text-xl mb-8">
+                  1. Create roles
+                  <br />
+                  2. Set balances
+                  <br />
+                  3. Sit back and relax
+                  <br />
+                </p>
+              </div>
+              <Link
+                className="hover:underline align-center mt-6 bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg"
+                to="about"
+              >
+                Learn more
+              </Link>
             </div>
             <div className="w-full sm:w-1/2 p-6">
               <img src="" />
