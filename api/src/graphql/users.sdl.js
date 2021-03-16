@@ -42,5 +42,6 @@ export const schema = gql`
     createUser(input: CreateUserInput!): User!
     updateUser(id: String!, input: UpdateUserInput!): User!
     deleteUser(id: String!): User!
+    mergeWithUser(id: String!): LimitedScopeUser!
   }
 `

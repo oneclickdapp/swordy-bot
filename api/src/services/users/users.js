@@ -2,8 +2,10 @@ import { db } from 'src/lib/db'
 import { fetchCollabLandUserWallets } from 'src/lib/collabLand'
 import { fetchUnlockProtocolNfts } from 'src/lib/unlockProtocol'
 import { fetchChievNfts } from 'src/lib/chiev'
+import { requireAuth } from 'src/lib/auth'
 
 export const users = () => {
+  throw new Error('Unauthorized')
   return db.user.findMany()
 }
 
@@ -11,6 +13,21 @@ export const user = ({ id }) => {
   return db.user.findOne({
     where: { id },
   })
+}
+
+export const mergeWithUser = async ({ id }) => {
+  const temporaryUser = await db.user.findOne({ where: { id } })
+  if (!temporaryUser) throw Error('User with that ID was not found')
+  await db.user.delete({ where: { id } })
+
+  const { platformId, platform } = temporaryUser
+  const user = context.currentUser
+  // Merge the temporary user with the current one
+  await db.user.update({
+    where: { id: user.id },
+    data: { platform, platformId },
+  })
+  return { id: user.id }
 }
 
 export const userByPlatformId = async ({ platformId, platform }) => {
@@ -64,12 +81,14 @@ export const userByDiscordId = async ({ discordId }) => {
 }
 
 export const createUser = ({ input }) => {
+  throw new Error('Unauthorized')
   return db.user.create({
     data: input,
   })
 }
 
 export const updateUser = ({ id, input }) => {
+  throw new Error('Unauthorized')
   return db.user.update({
     data: input,
     where: { id },
@@ -77,6 +96,7 @@ export const updateUser = ({ id, input }) => {
 }
 
 export const deleteUser = ({ id }) => {
+  throw new Error('Unauthorized')
   return db.user.delete({
     where: { id },
   })
