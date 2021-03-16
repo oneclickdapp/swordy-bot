@@ -6,14 +6,13 @@ const ADD_BOT_LINK =
 
 const HomePage = () => {
   return (
-    <div className="text-white bg-gradient-to-r from-purple to-pink ">
+    <div className="text-white bg-gradient-to-r from-green to-green-light ">
       <section className="container flex-grow py-32 text-center ">
         <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
           ⚔️ Swordy Bot
         </h1>
-
         <h3 className="my-4 text-3xl leading-tight">
-          Token-managed communities
+          Your Kingdom - Your Rules
         </h3>
         <div className="mt-8">
           <a
@@ -68,15 +67,15 @@ const HomePage = () => {
           <div className="flex flex-wrap">
             <div className="w-5/6 sm:w-1/2 p-6">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                How does it work?
+                How it works
               </h3>
               <div>
                 <p className="text-gray-600 text-xl mb-8">
                   1. Create roles
                   <br />
-                  2. Set balances
+                  2. Set token balances
                   <br />
-                  3. Sit back and relax
+                  3. Prosper
                   <br />
                 </p>
               </div>
@@ -88,7 +87,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className="w-full sm:w-1/2 p-6">
-              <img src="" />
+              <img src="/example.gif" />
             </div>
           </div>
 

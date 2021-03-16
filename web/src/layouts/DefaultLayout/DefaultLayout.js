@@ -70,7 +70,7 @@ const DefaultLayout = ({ children }) => {
           <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link to="/">
-                <img className="h-12" src={banner} />
+                <img className="h-6" src={banner} />
               </Link>
             </div>
             <div className="flex"></div>
