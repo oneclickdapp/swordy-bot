@@ -7,6 +7,7 @@ export const schema = gql`
     authDetail: AuthDetail
     guild: [Guild!]!
     roles: [Role!]!
+    currentSessionGuild: Guild
   }
 
   type HaveUserAddress {
@@ -21,7 +22,11 @@ export const schema = gql`
     users: [User!]!
     user(id: String!): User
     haveUserAddress(platformId: String!): HaveUserAddress
-    userByPlatformId(platformId: String!, platform: String!): LimitedScopeUser
+    userByPlatformId(
+      platformId: String!
+      platform: String!
+      guildId: String
+    ): LimitedScopeUser
     userByDiscordId(discordId: String!): User
   }
 

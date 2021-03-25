@@ -17,7 +17,7 @@ const DISCORD_ABOUT_BOT =
   '*Swordy is a community-maintained project by @pi0neerpat*'
 const DISCORD_APPROVE_CONSENT = `Searching...`
 const DISCORD_DENY_CONSENT = `Ok, no problem. Goodbye!`
-const DISCORD_CONSENT_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over. In your server, type "${process.env.INVOCATION_STRING}"`
+const DISCORD_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over.`
 const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. Someone must have revoked my permission to manage roles.`
 const DISCORD_ALREADY_HAVE_ROLE = `You already have the role `
 const DISCORD_GUILD_DOESNT_HAVE_ROLE = `This role does not exist. Please create it first.`
@@ -26,6 +26,8 @@ const ADMIN_PROPER_SYNTAX =
   'The proper syntax is: \n`<chain ID> <contract address> <required balance> <role rame> <purchase url (optional)>`\neg. `100 0x30D7b586F4fbd52ce164C1c204DD33BE49F53c7B 1 unlock-holder https://unlock-protocol.com/myNft`'
 const DISCORD_CHECKING_ACCOUNT = 'Looking up your account, one moment...'
 const DISCORD_NO_DM_INVOCATION = 'Sorry, you can only do that from a server'
+const DISCORD_CONTINUE_AUTH =
+  "\n\nAfter you're done, click the ✅ emoji to continue."
 module.exports = {
   DISCORD_SERVER_ERROR,
   DISCORD_SUCCESS_START,
@@ -38,7 +40,7 @@ module.exports = {
   DISCORD_ABOUT_BOT,
   DISCORD_APPROVE_CONSENT,
   DISCORD_DENY_CONSENT,
-  DISCORD_CONSENT_TIMEOUT,
+  DISCORD_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,
   DISCORD_ALREADY_HAVE_ROLE,
   DISCORD_GUILD_DOESNT_HAVE_ROLE,
@@ -46,4 +48,5 @@ module.exports = {
   ADMIN_PROPER_SYNTAX,
   DISCORD_CHECKING_ACCOUNT,
   DISCORD_NO_DM_INVOCATION,
+  DISCORD_CONTINUE_AUTH,
 }

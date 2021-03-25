@@ -15,10 +15,11 @@ const {
   DISCORD_INITIAL_AUTH,
   DISCORD_APPROVE_CONSENT,
   DISCORD_DENY_CONSENT,
-  DISCORD_CONSENT_TIMEOUT,
+  DISCORD_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,
   DISCORD_ALREADY_HAVE_ROLE,
   DISCORD_CHECKING_ACCOUNT,
+  DISCORD_CONTINUE_AUTH,
 } = require('../textContent')
 
 const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
@@ -100,12 +101,33 @@ const doCollabAuth = async ({ message, lastBotMessage }) => {
     })
 }
 
-const doSwordyAuth = async ({ message, lastBotMessage }) => {
+const doSwordyAuth = async ({ message, guildMember, guild }) => {
   const user = await apiMgr.userByPlatformId({
-    platformId: message.author.id,
+    platformId: guildMember.id,
     platform: 'discord',
+    guildId: guild.id,
   })
-  await lastBotMessage.reply(DISCORD_INITIAL_AUTH + LOGIN_URL + user.id)
+  const prompt = await message.reply(
+    DISCORD_INITIAL_AUTH + LOGIN_URL + user.id + DISCORD_CONTINUE_AUTH
+  )
+  await prompt.react('✅')
+  const filter = (reaction, user) => {
+    return ['✅'].includes(reaction.emoji.name)
+  }
+  prompt
+    .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+    .then(() => {
+      checkNftAndAssignRoles({
+        message,
+        guildMember,
+        guild,
+      })
+    })
+    .catch((collected) => {
+      console.log(collected)
+      console.log(`Timeout for emoji response ${message.author}`)
+      message.reply(DISCORD_TIMEOUT)
+    })
 }
 
 const handleInvoke = async (message) => {
@@ -136,7 +158,11 @@ const handleInvoke = async (message) => {
     // Otherwise do auth flow
     // Callback from auth flow will trigger the next step
     // return doCollabAuth({message, lastBotMessage})
-    return doSwordyAuth({ message, lastBotMessage })
+    return doSwordyAuth({
+      message: lastBotMessage,
+      guildMember,
+      guild,
+    })
   } catch (e) {
     console.log(e)
     message.reply(DISCORD_SERVER_ERROR)

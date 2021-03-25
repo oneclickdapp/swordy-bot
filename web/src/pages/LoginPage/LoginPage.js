@@ -35,6 +35,7 @@ const LoginPage = () => {
     try {
       await logIn(type)
       if (id) {
+        // TODO: if it makes sense, move this to backend
         await mergeWithUser({ variables: { id } })
       }
       // send mutation with id
@@ -96,7 +97,7 @@ const LoginPage = () => {
         <h1 className="text-l tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           👋 Welcome
         </h1>
-        <p className="mt-4">Click to sign-in with your wallet</p>
+        <p className="mt-4">Sign-in with your wallet</p>
         {renderCallToAction()}
         <p className="mt-12 text-s text-grey-600">
           Having trouble? Try clicking <button onClick={onLogOut}>here</button>{' '}

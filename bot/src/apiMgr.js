@@ -44,13 +44,12 @@ class ApiMgr {
     }
   }
 
-  async userByPlatformId({ platformId, platform }) {
+  async userByPlatformId({ platformId, platform, guildId }) {
     try {
       const res = await this.client.query({
         query: userByPlatformId,
-        variables: { platformId, platform },
+        variables: { platformId, platform, guildId },
       })
-      console.log(res.data)
       return res.data.userByPlatformId
     } catch (e) {
       console.log(e)

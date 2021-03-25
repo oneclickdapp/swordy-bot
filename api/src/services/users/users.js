@@ -21,35 +21,37 @@ export const mergeWithUser = async ({ id }) => {
   await db.user.delete({ where: { id } })
 
   const { platformId, platform } = temporaryUser
-  const user = context.currentUser
   // Merge the temporary user with the current one
-  await db.user.update({
-    where: { id: user.id },
+  let user = await db.user.update({
+    where: { id: context.currentUser.id },
     data: { platform, platformId },
   })
-  // Call the bot to complete the flow
-  // BUT WE DONT KNOW WHAT GUILD THIS IS FOR NOW
 
   return { id: user.id }
 }
 
-export const userByPlatformId = async ({ platformId, platform }) => {
-  let user = await db.user.findFirst({
+export const userByPlatformId = async ({ platformId, platform, guildId }) => {
+  return db.user.upsert({
     where: { platformId },
-  })
-  if (!user)
-    user = await db.user.create({
-      data: {
-        platformId,
-        platform,
+    create: {
+      platformId,
+      platform,
+      currentSessionGuild: {
+        connect: { platformId: guildId },
       },
-    })
-  return user
+    },
+    update: {
+      currentSessionGuild: {
+        connect: { platformId: guildId },
+      },
+    },
+  })
 }
 
 export const haveUserAddress = async ({ platformId }) => {
   let haveUserAddress = false
-  const userAddress = await db.user.findOne({ where: { platformId } }).address
+  const user = await db.user.findOne({ where: { platformId } })
+  const userAddress = user?.address
   if (userAddress) haveUserAddress = true
   return { haveUserAddress }
 }
@@ -110,4 +112,6 @@ export const User = {
     db.user.findOne({ where: { id: root.id } }).authDetail(),
   nftsOwned: (_obj, { root }) =>
     db.user.findOne({ where: { id: root.id } }).nftsOwned(),
+  currentSessionGuild: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).currentSessionGuild(),
 }

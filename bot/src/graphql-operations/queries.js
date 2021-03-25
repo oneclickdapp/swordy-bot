@@ -25,8 +25,12 @@ const haveUserAddress = gql`
   }
 `
 const userByPlatformId = gql`
-  query USER($platformId: String!, $platform: String!) {
-    userByPlatformId(platformId: $platformId, platform: $platform) {
+  query USER($platformId: String!, $platform: String!, $guildId: String) {
+    userByPlatformId(
+      platformId: $platformId
+      platform: $platform
+      guildId: $guildId
+    ) {
       id
     }
   }
