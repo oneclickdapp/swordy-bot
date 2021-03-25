@@ -9,11 +9,11 @@ const {
   DISCORD_SUCCESS_START,
   DISCORD_SUCCESS_ACTION,
   DISCORD_SUCCESS_FINISH,
-  DISCORD_FAIL,
+  DISCORD_INSUFFICIENT_BALANCE,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
   DISCORD_INITIAL_AUTH,
-  DISCORD_APPROVE_CONSENT,
+  DISCORD_GETTING_ROLES,
   DISCORD_DENY_CONSENT,
   DISCORD_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,
@@ -27,30 +27,28 @@ const CHIEV_ROLE_BASE = 'one-snoo-club'
 const LOGIN_URL = `${process.env.LOGIN_URL}?id=`
 const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   try {
-    await message.reply(DISCORD_APPROVE_CONSENT)
+    await message.reply(DISCORD_GETTING_ROLES)
 
-    const roles = await apiMgr.getRolesByUserAndGuild({
+    const { roles } = await apiMgr.getRolesByUserAndGuild({
       platformId: guildMember.id,
       guildId: guild.id,
     })
-    if (!roles) return message.reply(DISCORD_FAIL)
-
+    if (!roles.length) return message.reply(DISCORD_INSUFFICIENT_BALANCE)
     await message.reply(DISCORD_SUCCESS_START)
     await Promise.all(
       roles.map(async (role) => {
-        if (!role.isWorthy) return
         // Check if the role still exists in the guild
         // TODO: Update guild earlier during the process
         // to avoid needing to do this
         const existingRole = guild.roles.cache.find(
           (guildRole) => guildRole.id === role.platformId
         )
-        if (!existingRole)
+        if (!existingRole) {
           return console.log(
             `Role "${role.name}" does not exist for this guild.`
           )
-
-        guildMember.roles.add(role.id)
+        }
+        guildMember.roles.add(role.platformId)
         await message.reply(DISCORD_SUCCESS_ACTION + `\`${role.name}\``)
       })
     )
@@ -131,7 +129,7 @@ const doSwordyAuth = async ({ message, guildMember, guild }) => {
 }
 
 const handleInvoke = async (message) => {
-  // console.log(message)
+  console.log(`New message from ${message.author.id}`)
   try {
     const guild = message.guild
     const guildMember = message.member

@@ -5,7 +5,7 @@ const DISCORD_SUCCESS_START = "Yup, you've got the right stuff!"
 const DISCORD_SUCCESS_ACTION = '\n✨🗡️ I knight thee with '
 const DISCORD_SUCCESS_FINISH = 'Now arise and head back to your guild'
 
-const DISCORD_FAIL = `💼 Looks like you don't have the right NFTs in your wallet. Purchase one here: ${PURCHASE_URL}`
+const DISCORD_INSUFFICIENT_BALANCE = `🏳️ Looks like you don't have the right tokens in your wallet.\nYou can try getting them using this link:\n`
 const DISCORD_REPLY = `You think you're worthy? Check your DMs`
 const DISCORD_INITIAL_PROMPT = `⚔️ Ready to be knighted? \n\nTo continue, I need the following permissions:
 \n-\`Fetch your wallet address from your CollabLand account\`
@@ -15,7 +15,7 @@ const DISCORD_INITIAL_AUTH = `⚔️ Ready to be knighted? \n\nJust one more thi
 \n Click the link to login using your wallet:\n`
 const DISCORD_ABOUT_BOT =
   '*Swordy is a community-maintained project by @pi0neerpat*'
-const DISCORD_APPROVE_CONSENT = `Searching...`
+const DISCORD_GETTING_ROLES = `Loading roles...`
 const DISCORD_DENY_CONSENT = `Ok, no problem. Goodbye!`
 const DISCORD_TIMEOUT = `👻 Ghosted! If you want to continue, you'll need to start over.`
 const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. Someone must have revoked my permission to manage roles.`
@@ -33,12 +33,12 @@ module.exports = {
   DISCORD_SUCCESS_START,
   DISCORD_SUCCESS_ACTION,
   DISCORD_SUCCESS_FINISH,
-  DISCORD_FAIL,
+  DISCORD_INSUFFICIENT_BALANCE,
   DISCORD_REPLY,
   DISCORD_INITIAL_PROMPT,
   DISCORD_INITIAL_AUTH,
   DISCORD_ABOUT_BOT,
-  DISCORD_APPROVE_CONSENT,
+  DISCORD_GETTING_ROLES,
   DISCORD_DENY_CONSENT,
   DISCORD_TIMEOUT,
   DISCORD_INVALID_PERMISSIONS,

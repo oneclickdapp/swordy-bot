@@ -114,4 +114,6 @@ export const User = {
     db.user.findOne({ where: { id: root.id } }).nftsOwned(),
   currentSessionGuild: (_obj, { root }) =>
     db.user.findOne({ where: { id: root.id } }).currentSessionGuild(),
+  roles: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).roles(),
 }

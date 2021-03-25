@@ -52,6 +52,7 @@ const rolesByUserAndGuild = gql`
         iconUrl
       }
       isWorthy
+      platformId
     }
   }
 `

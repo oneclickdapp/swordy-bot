@@ -65,7 +65,7 @@ class ApiMgr {
         query: rolesByUserAndGuild,
         variables: { platformId, guildId },
       })
-      return { roles: res.data.rolesByUserAndGuild.roles }
+      return { roles: res.data.rolesByUserAndGuild }
     } catch (e) {
       console.log(e)
       throw new Error(e)
