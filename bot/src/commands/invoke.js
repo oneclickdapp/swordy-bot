@@ -33,6 +33,7 @@ const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
       platformId: guildMember.id,
       guildId: guild.id,
     })
+    // TODO: we need all role data, so we can have the URL for buying the token
     if (!roles.length) return message.reply(DISCORD_INSUFFICIENT_BALANCE)
     await message.reply(DISCORD_SUCCESS_START)
     await Promise.all(
