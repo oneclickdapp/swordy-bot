@@ -3,6 +3,7 @@ const Discord = require('discord.js')
 
 const { handleInvoke } = require('./commands/invoke')
 const { handleAdminUpdate } = require('./commands/admin')
+const { notifyMemberUpdate } = require('./commands/notifications')
 const { DISCORD_NO_DM_INVOCATION } = require('./textContent')
 const discordClient = new Discord.Client()
 

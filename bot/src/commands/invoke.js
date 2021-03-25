@@ -114,7 +114,7 @@ const doSwordyAuth = async ({ message, guildMember, guild }) => {
     return ['✅'].includes(reaction.emoji.name)
   }
   prompt
-    .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+    .awaitReactions(filter, { max: 1, time: 120000, errors: ['time'] })
     .then(() => {
       checkNftAndAssignRoles({
         message,
