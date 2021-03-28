@@ -14,10 +14,13 @@ const INVALID_NUMBER_OF_PARAMETERS = 'Invalid number of parameters'
 const { verifyInstall, getRoleFromName } = require('./common')
 
 const parseParams = ({ text }) => {
-  // !eg. "add-lock 0xabc1 100 role-name url-for-buying"
-  const params = text.split(' ')
-  if (params.length < 5) throw Error('#' + INVALID_NUMBER_OF_PARAMETERS)
-  const [_, chainId, contractAddress, balance, roleName, purchaseUrl] = params
+  // !eg. add-lock 0xabc1 100 "role name" url-for-buying"
+  const initialParams = text.split(' ').slice(0, 2)
+  const role = text.split('"')[1]
+  if (initialParams.length < 4 || !role)
+    throw Error('#' + INVALID_NUMBER_OF_PARAMETERS)
+  const purchaseUrl = text.split('"')[2]
+  const [_, chainId, contractAddress, balance] = initialParams
   if (!chainId.match(/^[0-9]+$/)) throw Error('#' + 'Invalid chain ID')
   if (!contractAddress.match(/^0x[0-9a-fA-F]{40}$/))
     throw Error('#' + INVALID_ETHEREUM_ADDRESS)
