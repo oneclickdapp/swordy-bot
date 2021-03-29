@@ -3,6 +3,7 @@ import { Contract } from '@ethersproject/contracts'
 import { Bignumber } from '@ethersproject/units'
 
 import erc721Abi from './erc721Abi'
+import erc20Abi from './erc20Abi'
 
 const getProviderByChainId = (chainId) => {
   if (chainId === '100') return new JsonRpcProvider(process.env.XDAI_RPC_URL)
