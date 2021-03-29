@@ -15,9 +15,9 @@ const { verifyInstall, getRoleFromName } = require('./common')
 
 const parseParams = ({ text }) => {
   // !eg. add-lock 0xabc1 100 "role name" url-for-buying"
-  const initialParams = text.split(' ').slice(0, 2)
-  const role = text.split('"')[1]
-  if (initialParams.length < 4 || !role)
+  const initialParams = text.split(' ').slice(0, 4)
+  const roleName = text.split('"')[1]
+  if (initialParams.length < 4 || !roleName)
     throw Error('#' + INVALID_NUMBER_OF_PARAMETERS)
   const purchaseUrl = text.split('"')[2]
   const [_, chainId, contractAddress, balance] = initialParams

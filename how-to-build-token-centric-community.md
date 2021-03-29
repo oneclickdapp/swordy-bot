@@ -37,6 +37,7 @@ The Decentralized Autonomous Organization (DAO) is the best example of a TPC. He
 
 - [MetaCartel](https://www.metacartel.org/) has distributed hundreds of thousands of dollars in the form of grants to support community projects. As new members join, the DAO's treasury grows from membership fees.
 - [Raid Guild](https://raidguild.org/) has completed hundreds of projects as a tech development studio. As projects are completed, a portion of earnings are put back into the treasury.
+- Chess DAO likes to play chess. They're still forming if you're interested.
 
 A TPC can also form around projects with governance or utility tokens. These are usually curated by the project team's themselves, but this isn't always the case. Here are some examples:
 
@@ -69,7 +70,7 @@ The key elements are:
 2.  Organize topics with clear names. Rather than name a channel "inner-chambers", instead use something like "DAO-members". This prevents newcomers from being overwhelmed with jargon.
 3.  Create outlets for being social and hanging out. All work and no play makes Jack a dull boy. Consider making a Category just for gaming, random topics, memes, and listening to music with [groovy bot](https://groovy.bot/).
 
-![]('./hangout-channels.png')
+![]('./starting-place.png')
 
 ## Purpose Statement
 
