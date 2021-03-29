@@ -6,7 +6,7 @@ import erc721Abi from './erc721Abi'
 
 const getProviderByChainId = (chainId) => {
   if (chainId === '100') return new JsonRpcProvider(process.env.XDAI_RPC_URL)
-  return new InfuraProvider(networkName, process.env.INFURA_ENDPOINT_KEY)
+  return new InfuraProvider(chainId, process.env.INFURA_ENDPOINT_KEY)
 }
 
 export const checkWorthiness = async ({ token, balance, userAddress }) => {
