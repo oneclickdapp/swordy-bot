@@ -31,7 +31,7 @@ But a **virtual treasury** doesn't actually exist anywhere. Confused? If TPC mem
 
 The concept of the virtual treasury means TPCs, just by existing, create incentives for members to contribute. It is the source of the never-ending "buzz" of a community, and keeps things moving even when there might not be a price tag for a particular task. The virtual treasury injects a healthy dose of positive moral into every conversation about the TPC.
 
-# Examples of TPCs
+# Examples of Existing TPCs
 
 The Decentralized Autonomous Organization (DAO) is the best example of a TPC. Here are some examples:
 
@@ -44,30 +44,20 @@ A TPC can also form around projects with governance or utility tokens. These are
 - [$RAC](https://www.coingecko.com/en/coins/rac) tokens are used by electronic artist Rac to curate his Discord server.
 - [$UDT](https://unlock-protocol.com/blog/unlock-tokens-launched) token is used by Unlock Protocol to allow holders to claim discounts on their purchases, and provides financial rewards for stakeholders.
 
-# Prerequisites
-
-Before you begin your journey to create a TPC, you must determine where you'd like to start from.
-
-## Purpose
-
-Do not be extractive. No one will want to participate if they feel they are being taken advantage of. In order to success, your community must have a clear purpose that people can get behind.
-
-## People
-
-Identify a small Power Squad so you can
-
-## Incentives
-
-This is where the token comes in! Here are your options:
-
-- Use tokens from existing projects
-- Create a DAO using [DaoHaus](https://daohaus.club/). The shares can serve as your token.
-- Hire the [Raid Guild](https://raidguild.org/) to design and launch a custom token.
-- Create one yourself. There are some great resources for learning Ethereum development at [EthHole.com](https://ethhole.com/learning)
-
 # From 0 to 10 Members - Establish your Foundation
 
 Let's get started!
+
+## Token
+
+I'm putting this section first, since the timing depends on what type of community you're creating, not because its the first thing you need to do. In fact, you really shouldn't launch a token until you have at least a dozen or so core contributors, a healthy mission, and high confidence and community support.
+
+Here are your options for your community tokens:
+
+- Use tokens from existing projects. Mix-n-match to your liking!
+- Create a DAO using [DaoHaus](https://daohaus.club/). The shares can serve as your token.
+- Hire the [Raid Guild](https://raidguild.org/) to design and launch a custom token.
+- Create one yourself. There are some great resources for learning Ethereum development at [EthHole.com](https://ethhole.com/learning)
 
 ## Platform
 
@@ -81,19 +71,23 @@ The key elements are:
 
 ![]('./hangout-channels.png')
 
+## Purpose Statement
+
+Before you can invite people, we need a concise statement that explains what we want to accomplish. Set some goals for now (hopefully to do good in the world), and write this in the form of a Purpose Statement. This will be your community's starting point, which will develop over time, and eventually become the Mission Statement.
+
 ## Core Contributors
 
-While its tempting to immediately open your community up to everyone, this will not be healthy or sustainable until you've established a strong foundation.
+Good, now you have a starting point, its time to invite people in. While its tempting to immediately open your community up to everyone, this will not be healthy or sustainable until you've established a strong foundation.
 
-**Don't announce your community anywhere. Instead, recruit core contributors who already identify with your purpose.**
+**Don't announce your community just yet. Instead, recruit core contributors who are already aligned with your Purpose Statement.**
 
-This is a delicate time, so don't be too harsh if you find the initial members you invited don't see eye-to-eye with your intentions. When in doubt, broaden your community's purpose and values to establish a good foundation. You can always narrow focus and be specific later, after you've found a solution that fits everyone's needs/goals.
+This is a delicate time, so don't be too harsh if the initial members you invited don't see eye-to-eye with your intentions. When in doubt, broaden your community's purpose to establish a good foundation. You can always narrow focus and be specific later.
 
-And some people just might not be a good fit, which is perfectly fine. Allow them hang out anyways. Who knows, they might jump back in one day.
+Some of those you invited might not be a good fit, which is perfectly fine. Allow them hang out anyways. Who knows, they might jump back in one day.
 
 > The "@contributors" role is a great way to signal who has been showing up, and doing work. Hand these out as much as possible, they'll be very useful later!
 
-Starting now, until you've reached 100 users, every channel should be publicly viewable. All discussions should "in the open", and you should encourage lots of brainstorming.
+From this point, until you've reached 100 users, every channel should be open for all participants. All discussions should "in the open", and you should encourage lots of brainstorming.
 
 ## Social bonds
 
