@@ -19,6 +19,10 @@ const AboutPage = () => {
           About ⚔️ Swordy Bot
         </h1>
         <Detail
+          title="UNDER CONSTRUCTION"
+          text="Swordy Bot is under rapid development, so these docs may not be up to date"
+        />
+        <Detail
           title="How does it work?"
           text="We use complicated machine learning ... just kidding! Its actually pretty straightforward. We just check the user's wallet for a tokens. If they own the right ones, then they earn roles in your community's server."
         />
