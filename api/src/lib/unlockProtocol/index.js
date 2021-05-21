@@ -1,1 +1,1 @@
-export { fetchUnlockProtocolNfts } from './unlockProtocol'
+export { isLockValid } from './unlockProtocol'
