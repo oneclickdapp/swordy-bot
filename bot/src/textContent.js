@@ -5,7 +5,7 @@ const DISCORD_SUCCESS_START = "Yup, you've got the right stuff!"
 const DISCORD_SUCCESS_ACTION = '\n✨🗡️ I knight thee with '
 const DISCORD_SUCCESS_FINISH = 'Now arise and head back to your guild'
 
-const DISCORD_INSUFFICIENT_BALANCE = `🏳️ Looks like you don't have the right tokens in your wallet.\nYou can try getting them using this link:\n`
+const DISCORD_INSUFFICIENT_BALANCE = `🏳️ Looks like you don't have the right tokens in your wallet.\n`
 const DISCORD_REPLY = `You think you're worthy? Check your DMs`
 const DISCORD_INITIAL_PROMPT = `⚔️ Ready to be knighted? \n\nTo continue, I need the following permissions:
 \n-\`Fetch your wallet address from your CollabLand account\`
