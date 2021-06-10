@@ -1,7 +1,8 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: yarn && cd bot && yarn # runs during prebuild
-    command: yarn rw dev && cd bot && yarn start
+  - init: yarn && cd bot && yarn && npm i -g nodemon # runs during prebuild
+    command: yarn rw dev
+    command: cd bot && nodemon -e yarn start
 
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/

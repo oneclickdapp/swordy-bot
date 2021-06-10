@@ -11,6 +11,7 @@ discordClient.once('ready', async () => {
 })
 
 discordClient.on('message', async (message) => {
+  if (!process.env.INVOCATION_STRING) throw 'No INVOCATION_STRING provided'
   if (process.env.INVOCATION_STRING.split(',').includes(message.content)) {
     if (message.channel.type == 'dm')
       return message.reply(DISCORD_NO_DM_INVOCATION)
