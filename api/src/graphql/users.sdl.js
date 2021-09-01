@@ -22,11 +22,6 @@ export const schema = gql`
     users: [User!]!
     user(id: String!): User
     haveUserAddress(platformId: String!): HaveUserAddress
-    userByPlatformId(
-      platformId: String!
-      platform: String!
-      guildId: String
-    ): LimitedScopeUser
     userByDiscordId(discordId: String!): User
   }
 

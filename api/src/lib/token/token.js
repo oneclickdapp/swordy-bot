@@ -1,17 +1,16 @@
 import { JsonRpcProvider, InfuraProvider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
-import { Bignumber } from '@ethersproject/units'
+import { parseUnits } from '@ethersproject/units'
+
+import { getProviderByChainId } from 'src/lib/helpers'
+import { isLockValid } from 'src/lib/unlockProtocol'
 
 import erc721Abi from './erc721Abi'
-
-const getProviderByChainId = (chainId) => {
-  if (chainId === '100') return new JsonRpcProvider(process.env.XDAI_RPC_URL)
-  return new InfuraProvider(networkName, process.env.INFURA_ENDPOINT_KEY)
-}
+import erc20Abi from './erc20Abi'
 
 export const checkWorthiness = async ({ token, balance, userAddress }) => {
   const { contractAddress, chainId, tokenId, type } = token
-  let userBalance
+  let userBalance = parseUnits('0', 18)
   const rpcProvider = getProviderByChainId(chainId)
   if (type === 'erc20')
     userBalance = await getErc20Balance({
@@ -26,9 +25,9 @@ export const checkWorthiness = async ({ token, balance, userAddress }) => {
       tokenId,
       userAddress,
     })
-  return true
-  // TODO: uncomment
-  // return userBalance.gte(Bignumber.from(balance))
+  if (type === 'unlock')
+    return await isLockValid({ contractAddress, chainId, userAddress })
+  return userBalance.gte(parseUnits(balance.toString(), 18))
 }
 
 const getErc721Balance = async ({

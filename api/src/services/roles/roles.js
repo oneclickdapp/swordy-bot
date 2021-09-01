@@ -63,7 +63,7 @@ export const updateRoleByBot = async ({
         chainId,
         contractAddress,
         // TODO: Check contract for token type
-        type: 'erc721',
+        type: 'unlock',
       },
     })
   }

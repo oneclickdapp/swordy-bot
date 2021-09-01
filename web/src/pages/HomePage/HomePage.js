@@ -2,7 +2,7 @@ import { Link, routes } from '@redwoodjs/router'
 import logo from './logo.png'
 
 const ADD_BOT_LINK =
-  'https://discord.com/oauth2/authorize?client_id=816782676438417429&scope=bot&permissions=268435456'
+  'https://discord.com/oauth2/authorize?client_id=816782676438417429&scope=bot&permissions=8'
 
 const HomePage = () => {
   return (

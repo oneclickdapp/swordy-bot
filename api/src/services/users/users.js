@@ -15,10 +15,16 @@ export const user = ({ id }) => {
   })
 }
 
-export const mergeWithUser = async ({ id }) => {
-  const temporaryUser = await db.user.findOne({ where: { id } })
-  if (!temporaryUser) throw Error('User with that ID was not found')
-  await db.user.delete({ where: { id } })
+export const loginSuccess = async ({ ephemeralId }) => {
+  // TODO: Get user ephemeralId from JWT auth
+
+  // Remove the ephemeralId from the user
+  const user = await db.user.update({
+    where: { ephemeralId },
+    data: {
+      ephemeralId: null,
+    },
+  })
 
   const { platformId, platform } = temporaryUser
   // Merge the temporary user with the current one
@@ -28,24 +34,6 @@ export const mergeWithUser = async ({ id }) => {
   })
 
   return { id: user.id }
-}
-
-export const userByPlatformId = async ({ platformId, platform, guildId }) => {
-  return db.user.upsert({
-    where: { platformId },
-    create: {
-      platformId,
-      platform,
-      currentSessionGuild: {
-        connect: { platformId: guildId },
-      },
-    },
-    update: {
-      currentSessionGuild: {
-        connect: { platformId: guildId },
-      },
-    },
-  })
 }
 
 export const haveUserAddress = async ({ platformId }) => {

@@ -23,6 +23,7 @@ model User {
   guilds Guild[] @relation(name: "userGuilds")
   roles Role[] @relation(name: "userRoles")
   currentSessionGuild Guild?
+  ephemeralId String?
 }
 
 model Guild {

@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import Pagination from './Pagination'
+import UserPage from './UserPage'
 
-describe('Pagination', () => {
+describe('UserPage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Pagination />)
+      render(<UserPage />)
     }).not.toThrow()
   })
 })

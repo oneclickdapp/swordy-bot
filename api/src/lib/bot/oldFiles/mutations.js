@@ -1,5 +1,20 @@
 const gql = require('graphql-tag')
 
+/////////////////////////////////
+// TODO: Move to API or delete
+
+const GET_OR_CREATE_USER_MUTATION = gql`
+  query USER($platformId: String!, $platform: String!, $guildId: String) {
+    getOrCreateUser(
+      platformId: $platformId
+      platform: $platform
+      guildId: $guildId
+    ) {
+      id
+    }
+  }
+`
+
 const updateRole = gql`
   mutation UPDATE_ROLE_BY_BOT(
     $platform: String!
@@ -33,4 +48,4 @@ const updateRole = gql`
     }
   }
 `
-module.exports = { updateRole }
+module.exports = { updateRole, GET_OR_CREATE_USER_MUTATION }

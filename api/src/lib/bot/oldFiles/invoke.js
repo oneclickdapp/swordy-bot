@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 const ApiMgr = require('../apiMgr')
 
 const apiMgr = new ApiMgr()
@@ -21,10 +19,12 @@ const {
   DISCORD_CHECKING_ACCOUNT,
   DISCORD_CONTINUE_AUTH,
 } = require('../textContent')
+const {
+  UNLOCKED_ROLE_BASE,
+  CHIEV_ROLE_BASE,
+  LOGIN_UR,
+} = require('../constants')
 
-const UNLOCKED_ROLE_BASE = 'Unlocked-Holder'
-const CHIEV_ROLE_BASE = 'one-snoo-club'
-const LOGIN_URL = `${process.env.LOGIN_URL}?id=`
 const checkNftAndAssignRoles = async ({ message, guildMember, guild }) => {
   try {
     await message.reply(DISCORD_GETTING_ROLES)
@@ -101,20 +101,21 @@ const doCollabAuth = async ({ message, lastBotMessage }) => {
 }
 
 const doSwordyAuth = async ({ message, guildMember, guild }) => {
-  const user = await apiMgr.userByPlatformId({
+  // Create the user in the database
+  const { id: userId } = await apiMgr.userByPlatformId({
     platformId: guildMember.id,
     platform: 'discord',
     guildId: guild.id,
   })
   const prompt = await message.reply(
-    DISCORD_INITIAL_AUTH + LOGIN_URL + user.id + DISCORD_CONTINUE_AUTH
+    DISCORD_INITIAL_AUTH + LOGIN_URL + userId + DISCORD_CONTINUE_AUTH
   )
   await prompt.react('✅')
   const filter = (reaction, user) => {
     return ['✅'].includes(reaction.emoji.name)
   }
   prompt
-    .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+    .awaitReactions(filter, { max: 1, time: 120000, errors: ['time'] })
     .then(() => {
       checkNftAndAssignRoles({
         message,
@@ -127,45 +128,6 @@ const doSwordyAuth = async ({ message, guildMember, guild }) => {
       console.log(`Timeout for emoji response ${message.author}`)
       message.reply(DISCORD_TIMEOUT)
     })
-}
-
-const handleInvoke = async (message) => {
-  console.log(`New message from ${message.author.id}`)
-  try {
-    const guild = message.guild
-    const guildMember = message.member
-
-    // Check bot is set up properly
-    if (!message.guild.me.hasPermission(['MANAGE_ROLES']))
-      return message.channel.send(DISCORD_INVALID_PERMISSIONS)
-
-    // Tell user to check DMs
-    message.reply(DISCORD_REPLY)
-    // Start DM with user
-    let lastBotMessage = await message.author.send(DISCORD_CHECKING_ACCOUNT)
-
-    const haveUserAddress = await apiMgr.haveUserAddress({
-      platformId: message.author.id,
-    })
-    if (haveUserAddress)
-      return checkNftAndAssignRoles({
-        message: lastBotMessage,
-        guildMember,
-        guild,
-      })
-
-    // Otherwise do auth flow
-    // Callback from auth flow will trigger the next step
-    // return doCollabAuth({message, lastBotMessage})
-    return doSwordyAuth({
-      message: lastBotMessage,
-      guildMember,
-      guild,
-    })
-  } catch (e) {
-    console.log(e)
-    message.reply(DISCORD_SERVER_ERROR)
-  }
 }
 
 module.exports = { handleInvoke }

@@ -5,11 +5,13 @@
 # For the full list of options, see the "App Configuration: redwood.toml" doc:
 # https://redwoodjs.com/docs/app-configuration-redwood-toml
 
-# [web]
-#   port = 8910
-#   apiProxyPath = "/api"
+[web]
+  port = 8910
+  host = "0.0.0.0"
+  apiProxyPath = "/api"
 [api]
   port = 8911
+  host = "0.0.0.0"
   schemaPath = "./api/db/schema.prisma"
   includeEnvironmentVariables=['INFURA_ENDPOINT_KEY','XDAI_RPC_URL', 'COLLAB_LAND_APP_ID', 'COLLAB_LAND_APP_SECRET']
 [browser]
