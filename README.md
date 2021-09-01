@@ -65,19 +65,19 @@ In order to collect all the required environment variables, you'll need to deplo
 
 ### Vercel - Backend + Frontend
 
-Point vercel to your repo, and deploy. Redwood build commands should be auto-configured.
+Create a new Vercel app using your forked repo. The build commands are automatically detected for RedwoodJS projects.
 
-Update the environment variables for what you see in the root `.env` file. The only new one is `DATABASE_URL` which you need from your Heroku database in the next step.
+Update the environment variables for what you see in the root `.env` file. You will get `DATABASE_URL` from your Heroku database in the next step.
 
 ### Heroku - Bot
 
 Heroku doesn't like apps that aren't in the root folder. To get around this, I added a `heroku-prebuild` script which installs the bot dependencies. The Procfile runs the `bot.js`
 
-Once deployed, head to the "Resources" tab, turn off the `web` Dyno, and turn on the `worker` Dyno. This Dyno is defined in the repo root `Procfile`.
+Once deployed, head to the "Resources" tab for this Heroku app, turn off the `web` Dyno, and turn on the `worker` Dyno. This Dyno is defined in the repo root `Procfile`.
 
 Update the environment variables in "Settings" tab to reflect what you see in the `.env` here.
 
-Add a new postgres add-on and add the url to the Vercel environment.
+Create a new **postgres add-on** in this Heroku app, and add the url to the Vercel environment as `DATABASE_URL`.
 
 ### Discord
 
@@ -101,7 +101,11 @@ https://discord.com/oauth2/authorize?client_id=<clientID>&scope=bot&permissions=
 
 ## Docker option
 
-If you want to avoid Heroku for the bot, you can use docker. If you've made changes to the bot, you'll need to generate a new Docker image.
+If you want to avoid Heroku for the bot, you can use docker.
+
+> Note: avoiding Heroku means you'll also need to bring your own postgres database. See the docs for [self-hosting redwood](https://redwoodjs.com/cookbook/self-hosting-redwood.html#self-hosting-redwood).
+
+If you've made changes to the bot, generate your own Docker image.
 
 ```bash
 # Build
@@ -123,10 +127,10 @@ source .env
 docker-compose up -d
 ```
 
-## Notes
+## Troubleshooting + Tips
 
 - If you have permissions errors, try giving the bot a higher role. Bots can only give roles to members in a _lower position_ than their own highest role. See https://discord.com/developers/docs/topics/permissions#permission-hierarchy
-- Helpful discord docs for making a "emoji-reaction" menu https://discordjs.guide/popular-topics/reactions.html#awaiting-reactions
+- Make an "emoji-reaction" menu https://discordjs.guide/popular-topics/reactions.html#awaiting-reactions
 
 ## Author
 
