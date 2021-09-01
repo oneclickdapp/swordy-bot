@@ -1,45 +1,67 @@
-<h1 align="center">Welcome to unlock-protocol-discord-bot 👋</h1>
+<h1 align="center">Welcome swordy-bot 👋</h1>
 <p>
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
 
-> A Discord bot which prompts the user to enter their DID, and creates a new challenge for them.
+> An Ethereum wallet verification service for role-gated Discord servers.
 
 ## Whats included
 
-- **Discord bot** w/ docker container in `/bot`
-- **API server** RedwoodJS API in `/api`
-- **(incomplete) Frontend** RedwoodJS web app in `/web`
+- **🤖 Discord bot `/bot`**
+- **🛰️ Redwood api server `/api`**
+- **🖥️ Redwood web app `/web`**
 
-## Local Development
+## Development
 
-Setup the backend + frontend
+Install both the app and bot
 
 ```bash
+# Redwood
 yarn
 
-# Initialize SQL-lite and perform initial migrations
-yarn rw db save
-yarn rw db up
-
-# Start the API service and Frontend
-yarn rw dev
+# Discord Bot
+cd bot && yarn
 ```
 
 Start the bot
 
 ```bash
-cd bot && yarn
+# In /bot, update the variables here
+cp .env.template .env
+
 yarn start
+```
+
+Set up the Redwood App
+
+```bash
+# In root of the repo, update the variables here
+cp .env.template .env
+
+
+# Create a new database and perform migrations
+yarn rw prisma migrate dev
+```
+
+Start Prisma Studio (database admin tool)
+
+```bash
+yarn rw prisma studio
+```
+
+Start both the Redwood frontend and api
+
+```bash
+yarn rw dev
 ```
 
 ## Going to Production
 
 The easiest way to deploy is using Vercel for the frontend and backend, and Heroku for the bot and postgres database. Hosting this way is free, and can be setup in about 10 minutes.
 
-In order to collect all the required environment variables, you'll need to deploy all three parts (bot, FE+BE, discord app), and go back and update as necessary.
+In order to collect all the required environment variables, you'll need to deploy all three parts (bot, FE+BE, discord app), then go back and update the env variables as necessary.
 
 ### Vercel - Backend + Frontend
 
@@ -70,8 +92,11 @@ Copy the `TOKEN` and add it to your bot app.
 Now add the bot to your server. In the Discord Application, in "General Information", copy the `CLIENT ID`. Insert it in this URL, and have the server administrator open it.
 
 ```
+
 # Add the bot with role management permissions
+
 https://discord.com/oauth2/authorize?client_id=<clientID>&scope=bot&permissions=268435456
+
 ```
 
 ## Docker option
@@ -114,6 +139,10 @@ docker-compose up -d
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+## Sponsors
+
+Big thanks to the [Unlock Protocol](unlock-protocol.com) developer grants program for providing support for this project!
 
 ---
 
