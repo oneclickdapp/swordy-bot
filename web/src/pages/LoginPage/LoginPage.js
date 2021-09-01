@@ -21,15 +21,17 @@ const LoginPage = () => {
   const { logIn, logOut, isAuthenticated, loading, currentUser } = useAuth()
   const { ephemeralId } = useParams()
 
-  const [loginSuccess, { _, error: queryError }] = useQuery({
+  const [loginSuccess, { _, error: queryError }] = useQuery(
     LOGIN_SUCCESS_QUERY,
-    onCompleted: () => {
-      setStatus(COMPLETE)
-      setTimeout(function () {
-        navigate(routes.user({ address: currentUser?.address }))
-      }, 5000)
-    },
-  })
+    {
+      onCompleted: () => {
+        setStatus(COMPLETE)
+        setTimeout(function () {
+          navigate(routes.user({ address: currentUser?.address }))
+        }, 5000)
+      },
+    }
+  )
 
   const onLogIn = async (type) => {
     setStatus(LOADING)

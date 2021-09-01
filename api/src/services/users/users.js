@@ -26,51 +26,7 @@ export const loginSuccess = async ({ ephemeralId }) => {
     },
   })
 
-  const { platformId, platform } = temporaryUser
-  // Merge the temporary user with the current one
-  let user = await db.user.update({
-    where: { id: context.currentUser.id },
-    data: { platform, platformId },
-  })
-
   return { id: user.id }
-}
-
-export const haveUserAddress = async ({ platformId }) => {
-  let haveUserAddress = false
-  const user = await db.user.findOne({ where: { platformId } })
-  const userAddress = user?.address
-  if (userAddress) haveUserAddress = true
-  return { haveUserAddress }
-}
-
-export const userByDiscordId = async ({ discordId }) => {
-  // DELETE ME only for testing purposes
-  // await db.user.delete({
-  //   where: { discordId },
-  // })
-  let user = await db.user.findOne({
-    where: { discordId },
-  })
-  if (user) console.log(`User "${discordId}" found.`)
-  if (!user) {
-    console.log(`User "${discordId}" not found. Asking CollabLand...`)
-    const wallets = await fetchCollabLandUserWallets(discordId)
-    // TODO: throw error if no wallets?
-    if (!wallets.length) throw Error('User is not signed up with Collab Land')
-
-    // TODO: check multiple wallets
-    const userAddress = wallets[0].address
-
-    user = await db.user.create({
-      data: { discordId, address: userAddress },
-    })
-  }
-
-  // NOTE: NFT ownership data is ephemeral, so we should not store it in the database
-  const nfts = await fetchUnlockProtocolNfts(user.address)
-  const chievs = await fetchChievNfts(user.address)
-  return { ...user, nfts: [...nfts, ...chievs] }
 }
 
 export const createUser = ({ input }) => {

@@ -21,6 +21,7 @@ export const schema = gql`
   type Query {
     users: [User!]!
     user(id: String!): User
+    loginSuccess(address: String!): User
     haveUserAddress(platformId: String!): HaveUserAddress
     userByDiscordId(discordId: String!): User
   }
