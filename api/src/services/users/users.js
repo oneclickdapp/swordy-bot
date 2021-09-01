@@ -30,24 +30,6 @@ export const mergeWithUser = async ({ id }) => {
   return { id: user.id }
 }
 
-export const userByPlatformId = async ({ platformId, platform, guildId }) => {
-  return db.user.upsert({
-    where: { platformId },
-    create: {
-      platformId,
-      platform,
-      currentSessionGuild: {
-        connect: { platformId: guildId },
-      },
-    },
-    update: {
-      currentSessionGuild: {
-        connect: { platformId: guildId },
-      },
-    },
-  })
-}
-
 export const haveUserAddress = async ({ platformId }) => {
   let haveUserAddress = false
   const user = await db.user.findOne({ where: { platformId } })
