@@ -1,13 +1,14 @@
 require('dotenv').config()
 const Discord = require('discord.js')
 
-const { handleAdminUpdate } = require('./commands/admin')
-const { notifyMemberUpdate } = require('./commands/notifications')
-const { DISCORD_NO_DM_INVOCATION } = require('./textContent')
-const ApiMgr = require('../apiMgr')
+const ApiMgr = require('./apiMgr')
 
 const apiMgr = new ApiMgr()
 const discordClient = new Discord.Client()
+
+const DISCORD_NO_DM_INVOCATION = 'Sorry, you can only do that from a server'
+const DISCORD_INVALID_PERMISSIONS = `⛈️ Sorry, I'm powerless. Someone must have revoked my permission to manage roles.`
+const DISCORD_SERVER_ERROR = `⛈️ Sorry, something went terribly wrong.`
 
 const handleInvoke = async (message) => {
   console.log(`New invocation from ${message.author.id}`)
@@ -38,11 +39,6 @@ discordClient.on('message', async (message) => {
     }
     handleInvoke(message)
   }
-})
-
-// TODO: Remove if unused
-discordClient.on('guildMemberUpdate', (oldMember, newMember) => {
-  notifyMemberUpdate({ oldMember, newMember })
 })
 
 discordClient.login(process.env.DISCORD_TOKEN)
