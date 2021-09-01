@@ -20,7 +20,7 @@ export const loginSuccess = async ({ ephemeralId }) => {
 
   // Remove the ephemeralId from the user
   const user = await db.user.update({
-    where: { address },
+    where: { ephemeralId },
     data: {
       ephemeralId: null,
     },

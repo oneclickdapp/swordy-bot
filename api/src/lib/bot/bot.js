@@ -29,5 +29,9 @@ export const handleMessage = async ({
     },
   })
   // Return the unique URL for the response
-  return DISCORD_INITIAL_AUTH + LOGIN_URL + ephemeralId
+  return {
+    text: DISCORD_INITIAL_AUTH + LOGIN_URL + ephemeralId,
+    type: 'reply',
+    url: null,
+  }
 }

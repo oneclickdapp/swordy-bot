@@ -16,8 +16,10 @@ const handleInvoke = async (message) => {
     if (!message.guild.me.hasPermission(['MANAGE_ROLES']))
       return message.channel.send(DISCORD_INVALID_PERMISSIONS)
 
-    const response = await postMessage({ message })
-    if (response) message.reply(response)
+    const { text, url, type } = await postMessage({ message })
+    if (responseType === 'reply') message.reply(text)
+    // TODO: Add embed response type
+    // TODO: Add DM message response type
   } catch (e) {
     console.log(e)
     message.reply(DISCORD_SERVER_ERROR)

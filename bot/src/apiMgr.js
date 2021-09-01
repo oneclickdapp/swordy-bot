@@ -37,7 +37,7 @@ class ApiMgr {
           guildId: message.guild.id,
         },
       })
-      return res.data.response
+      return res.data
     } catch (e) {
       console.log(e)
       throw new Error(e)

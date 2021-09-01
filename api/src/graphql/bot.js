@@ -1,6 +1,8 @@
 export const schema = gql`
   type Response {
-    response: String!
+    type: String!
+    text: String
+    url: String
   }
   type Query {
     postMessage(
