@@ -1,3 +1,4 @@
+// TODO: Remove if unused
 const notifyMemberUpdate = async ({ oldMember, newMember }) => {
   // If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
 

@@ -6,7 +6,6 @@ const DISCORD_SUCCESS_ACTION = '\n✨🗡️ I knight thee with '
 const DISCORD_SUCCESS_FINISH = 'Now arise and head back to your guild'
 
 const DISCORD_INSUFFICIENT_BALANCE = `🏳️ Looks like you don't have the right tokens in your wallet.\n`
-const DISCORD_REPLY = `You think you're worthy? Check your DMs`
 const DISCORD_INITIAL_PROMPT = `⚔️ Ready to be knighted? \n\nTo continue, I need the following permissions:
 \n-\`Fetch your wallet address from your CollabLand account\`
 \n If you agree, click the ✅`
@@ -24,10 +23,10 @@ const DISCORD_GUILD_DOESNT_HAVE_ROLE = `This role does not exist. Please create 
 const INVALID_ETHEREUM_ADDRESS = 'The ethereum address you provided is invalid.'
 const ADMIN_PROPER_SYNTAX =
   'The proper syntax is: \n`<chain ID> <contract address> <required balance> <role rame> <purchase url (optional)>`\neg. `100 0x30D7b586F4fbd52ce164C1c204DD33BE49F53c7B 1 unlock-holder https://unlock-protocol.com/myNft`'
-const DISCORD_CHECKING_ACCOUNT = 'Looking up your account, one moment...'
 const DISCORD_NO_DM_INVOCATION = 'Sorry, you can only do that from a server'
 const DISCORD_CONTINUE_AUTH =
   "\n\nAfter you're done, click the ✅ emoji to continue."
+
 module.exports = {
   DISCORD_SERVER_ERROR,
   DISCORD_SUCCESS_START,

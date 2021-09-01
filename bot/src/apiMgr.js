@@ -5,7 +5,8 @@ const fetch = require('cross-fetch')
 const {
   rolesByUserAndGuild,
   haveUserAddress,
-  userByPlatformId,
+  GET_OR_CREATE_USER_MUTATION,
+  POST_MESSAGE_QUERY,
 } = require('./graphql-operations/queries')
 const { updateRole } = require('./graphql-operations/mutations')
 
@@ -31,23 +32,29 @@ class ApiMgr {
     })
   }
 
-  async haveUserAddress({ platformId }) {
+  async postMessage({ message }) {
     try {
       const res = await this.client.query({
-        query: haveUserAddress,
-        variables: { platformId },
+        query: POST_MESSAGE_QUERY,
+        variables: {
+          content: message.content,
+          platformUserId: message.member.id,
+          platform: 'discord',
+          guildId: message.guild.id,
+        },
       })
-      return res.data.haveUserAddress.haveUserAddress
+      return res.data.response
     } catch (e) {
       console.log(e)
       throw new Error(e)
     }
   }
-
+  ////////////////////////////////////////////
+  // TODO: Move to API
   async userByPlatformId({ platformId, platform, guildId }) {
     try {
-      const res = await this.client.query({
-        query: userByPlatformId,
+      const res = await this.client.mutate({
+        query: GET_OR_CREATE_USER_MUTATION,
         variables: { platformId, platform, guildId },
       })
       return res.data.userByPlatformId

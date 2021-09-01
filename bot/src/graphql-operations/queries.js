@@ -1,37 +1,28 @@
 const gql = require('graphql-tag')
 
-// Old way - deleteme
-// const userByDiscordId = gql`
-//   query USER_BY_DISCORD_ID($discordId: String!) {
-//     userByDiscordId(discordId: $discordId) {
-//       id
-//       nfts {
-//         website
-//         contractAddress
-//         tokenId
-//         uri
-//         chainId
-//         iconUrl
-//       }
-//     }
-//   }
-// `
-
+const POST_MESSAGE_QUERY = gql`
+  query POST_MESSAGE_QUERY(
+    $content: String!
+    $platformUserId: String!
+    $platform: String!
+    $guildId: String!
+  ) {
+    haveUserAddress(
+      content: $content
+      platformUserId: $platformUserId
+      platform: $platform
+      guildId: $guildId
+    ) {
+      response
+    }
+  }
+`
+/////////////////////////////////
+// TODO: Move to API or delete
 const haveUserAddress = gql`
   query HAVE_USER_ADDRESS($platformId: String!) {
     haveUserAddress(platformId: $platformId) {
       haveUserAddress
-    }
-  }
-`
-const userByPlatformId = gql`
-  query USER($platformId: String!, $platform: String!, $guildId: String) {
-    userByPlatformId(
-      platformId: $platformId
-      platform: $platform
-      guildId: $guildId
-    ) {
-      id
     }
   }
 `
@@ -56,4 +47,4 @@ const rolesByUserAndGuild = gql`
     }
   }
 `
-module.exports = { rolesByUserAndGuild, haveUserAddress, userByPlatformId }
+module.exports = { rolesByUserAndGuild, haveUserAddress, POST_MESSAGE_QUERY }
