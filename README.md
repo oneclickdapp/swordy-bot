@@ -1,3 +1,13 @@
+# This is an older version of Swordy Bot - not the live production app!  
+
+#### NOTE: You should not expect this to work out-of-the-box, but rather use it as an example and a learning tool. Here are some of my takeaways from this version:
+
+- **Most important!** The app logic should not be split between the Heroku Discord Bot and the RedwoodJS app. Instead, the Heroku Discord Bot should be as "dumb" as possible, and simply act as a messenger between Discord and the RedwoodJS app. 
+- I did not implement Discord OAuth here, but rather my own solution for verifying ownership which requires DM'ing. Using the Discord Oauth is a better solution overall in terms of UX, and is harder to break, despite being much more work to implement.
+- This bot requires DM'ing the user a unique link to verify ownership. This is an anti-pattern, since many users disable DM'ing from other server participants to prevent spam. This means the bot simply appears "broken" to this set of users.
+
+--- 
+
 <h1 align="center">Welcome to unlock-protocol-discord-bot 👋</h1>
 <p>
   <a href="#" target="_blank">
